@@ -11,6 +11,7 @@ import { NavController, NavParams } from 'ionic-angular';
 @Component({
   selector: 'page-login-register',
   templateUrl: 'login-register.html',
+  
 })
 export class LoginRegisterPage {
 

@@ -15,6 +15,7 @@ import { ProfilePage } from '../pages/profile/profile';
 import { LoginRegisterPage } from '../pages/login-register/login-register';
 import { TabsPage } from '../pages/tabs/tabs';
 import { RidesPage } from '../pages/rides/rides';
+import { DataProvider } from '../providers/data/data';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { RidesPage } from '../pages/rides/rides';
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: ErrorHandler, useClass: IonicErrorHandler }
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
+    DataProvider
   ]
 })
 export class AppModule {

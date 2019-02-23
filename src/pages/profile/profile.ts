@@ -20,5 +20,8 @@ export class ProfilePage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProfilePage');
   }
+  logout() {
+    localStorage.removeItem('token');
+  }
 
 }
