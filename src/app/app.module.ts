@@ -16,6 +16,7 @@ import { LoginRegisterPage } from '../pages/login-register/login-register';
 import { TabsPage } from '../pages/tabs/tabs';
 import { RidesPage } from '../pages/rides/rides';
 import { DataProvider } from '../providers/data/data';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { DataProvider } from '../providers/data/data';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    HttpClientModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -43,7 +45,7 @@ import { DataProvider } from '../providers/data/data';
     StatusBar,
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    DataProvider
+    DataProvider,
   ]
 })
 export class AppModule {

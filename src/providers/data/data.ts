@@ -11,6 +11,7 @@ import { LoginResponse, RegisteredResponse, User } from '../../interface/user';
 @Injectable()
 export class DataProvider {
   mediaURL = 'http://media.mw.metropolia.fi/wbma/';
+  loggedIn = false;
 
   constructor(public http: HttpClient) {
     // Do something
@@ -34,5 +35,19 @@ export class DataProvider {
     };
     return this.http.post<RegisteredResponse>(this.mediaURL + 'users', user,
       httpOptions);
+  }
+
+  getUserProfile() {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json',
+        'x-access-token': localStorage.getItem('token'),
+      }),
+    };
+    return this.http.get<User>(this.mediaURL + 'users/user', httpOptions);
+  }
+
+  getProfilePic() {
+    return this.http.get(this.mediaURL + '/tags/profile')
   }
 }
