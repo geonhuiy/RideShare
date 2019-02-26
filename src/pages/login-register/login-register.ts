@@ -1,8 +1,12 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { AlertController, NavController, NavParams } from 'ionic-angular';
 import { DataProvider } from '../../providers/data/data';
-import { LoginResponse, RegisteredResponse, User } from '../../interface/user';
-import { MyApp } from '../../app/app.component';
+import {
+  LoginResponse,
+  RegisteredResponse,
+  User,
+  UsernameStatus,
+} from '../../interface/user';
 
 /**
  * Generated class for the LoginRegisterPage page.
@@ -19,10 +23,19 @@ export class LoginRegisterPage {
   userData: User = { username: null };
   registerData: User = { username: null };
   hasAccount = true;
+  private passwordCheck: string;
+  private usernameCheck = true;
+  private passwordMatch = true;
+  private registering = true;
+  @ViewChild('loginForm') loginForm;
+  @ViewChild('registerForm') registerForm;
 
   constructor(
-    public navCtrl: NavController, public navParams: NavParams,
-    private dataProvider: DataProvider) {
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private dataProvider: DataProvider,
+    private alertCtrl: AlertController,
+  ) {
   }
 
   login() {
@@ -33,6 +46,11 @@ export class LoginRegisterPage {
         localStorage.setItem('userId', response.user.user_id.toString());
         this.dataProvider.loggedIn = true;
         this.navCtrl.parent.select(0);
+        if (this.hasAccount) {
+          this.loginForm.reset();
+        } else {
+          this.registerForm.reset();
+        }
       },
       error => {
         console.log(error);
@@ -41,15 +59,52 @@ export class LoginRegisterPage {
   }
 
   register() {
-    this.dataProvider.register(this.registerData).subscribe(
-      (response: RegisteredResponse) => {
+    if (this.usernameCheck && this.passwordMatch) {
+      this.dataProvider.register(this.registerData).subscribe(
+        (response: RegisteredResponse) => {
+          console.log(response);
+          this.registering = true;
+          this.userData.username = this.registerData.username;
+          this.userData.password = this.registerData.password;
+          this.login();
+        },
+        (error) => {
+          console.log(error);
+        },
+      );
+    } else {
+      this.presentAlert('Please fix errors in the form');
+    }
+
+  }
+
+  checkUsername() {
+    this.dataProvider.getUserName(this.registerData.username).subscribe(
+      (response: UsernameStatus) => {
         console.log(response);
-        this.userData.username = this.registerData.username;
-        this.userData.password = this.registerData.password;
-        this.dataProvider.login(this.userData);
-        this.dataProvider.loggedIn = true;
-        this.navCtrl.parent.select(0);
+        console.log(this.registerForm);
+        if (response.available) {
+          this.usernameCheck = true;
+        } else {
+          this.registerForm.form.controls['newUsername'].setErrors(
+            { 'incorrect': true });
+          this.usernameCheck = false;
+        }
       },
-    );
+      error => {
+        console.log(error);
+      });
+  }
+
+  checkPassword() {
+    this.passwordMatch = this.registerData.password === this.passwordCheck;
+  }
+
+  presentAlert(message: string) {
+    const alert = this.alertCtrl.create({
+      title: message,
+      buttons: ['OK'],
+    });
+    alert.present();
   }
 }

@@ -1,6 +1,11 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { LoginResponse, RegisteredResponse, User } from '../../interface/user';
+import {
+  LoginResponse,
+  RegisteredResponse,
+  User,
+  UsernameStatus,
+} from '../../interface/user';
 
 /*
   Generated class for the DataProvider provider.
@@ -48,6 +53,10 @@ export class DataProvider {
   }
 
   getProfilePic() {
-    return this.http.get(this.mediaURL + '/tags/profile')
+    return this.http.get(this.mediaURL + '/tags/profile');
+  }
+
+  getUserName(username: string) {
+    return this.http.get<UsernameStatus>(this.mediaURL + 'users/username/' + username);
   }
 }

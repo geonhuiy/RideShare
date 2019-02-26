@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { User } from '../../interface/user';
 import { DataProvider } from '../../providers/data/data';
+import { LoginRegisterPage } from '../login-register/login-register';
 
 /**
  * Generated class for the ProfilePage page.
@@ -9,7 +10,6 @@ import { DataProvider } from '../../providers/data/data';
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-
 @Component({
   selector: 'page-profile',
   templateUrl: 'profile.html',
@@ -19,7 +19,6 @@ export class ProfilePage {
     public navCtrl: NavController,
     public navParams: NavParams,
     private dataProvider: DataProvider) {
-
   }
 
   ionViewDidLoad() {

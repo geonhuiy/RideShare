@@ -17,3 +17,8 @@ export interface RegisteredResponse {
   message: string;
   user_id: number;
 }
+
+export interface UsernameStatus {
+  username:string;
+  available: boolean;
+}
