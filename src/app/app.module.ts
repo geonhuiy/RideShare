@@ -17,6 +17,9 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { RidesPage } from '../pages/rides/rides';
 import { DataProvider } from '../providers/data/data';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { GetridePage } from '../pages/getride/getride';
+import { ShareridePage } from '../pages/shareride/shareride';
+import { EditProfilePage } from '../pages/edit-profile/edit-profile';
 
 @NgModule({
   declarations: [
@@ -25,7 +28,10 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     ProfilePage,
     LoginRegisterPage,
     TabsPage,
-    RidesPage
+    RidesPage,
+    GetridePage,
+    ShareridePage,
+    EditProfilePage
   ],
   imports: [
     BrowserModule,
@@ -39,7 +45,10 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     TabsPage,
     LoginRegisterPage,
     RidesPage,
-    ProfilePage
+    ProfilePage,
+    GetridePage,
+    ShareridePage,
+    EditProfilePage
   ],
   providers: [
     StatusBar,

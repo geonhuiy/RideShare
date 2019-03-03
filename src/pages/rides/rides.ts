@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { GetridePage } from '../getride/getride';
+import { ShareridePage } from '../shareride/shareride';
 
 /**
  * Generated class for the RidesPage page.
@@ -17,8 +19,11 @@ export class RidesPage {
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad RidesPage');
+  openGetRides() {
+    this.navCtrl.push(GetridePage);
   }
 
+  openShareRides() {
+    this.navCtrl.push(ShareridePage);
+  }
 }

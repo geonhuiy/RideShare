@@ -1,5 +1,7 @@
 {
   "name": "RideShare",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "ionic-angular"
 }

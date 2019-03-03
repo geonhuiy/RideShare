@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {
   LoginResponse,
-  RegisteredResponse,
+  RegisteredResponse, Update,
   User,
   UsernameStatus,
 } from '../../interface/user';
@@ -23,13 +23,7 @@ export class DataProvider {
   }
 
   login(user: User) {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-type': 'application/json',
-      }),
-    };
-    return this.http.post<LoginResponse>(this.mediaURL + 'login', user,
-      httpOptions);
+    return this.http.post<LoginResponse>(this.mediaURL + 'login', user);
   }
 
   register(user: User) {
@@ -53,10 +47,21 @@ export class DataProvider {
   }
 
   getProfilePic() {
-    return this.http.get(this.mediaURL + '/tags/profile');
+    return this.http.get(this.mediaURL + 'tags/profile');
   }
 
   getUserName(username: string) {
-    return this.http.get<UsernameStatus>(this.mediaURL + 'users/username/' + username);
+    return this.http.get<UsernameStatus>(
+      this.mediaURL + 'users/username/' + username);
+  }
+
+  updateUserData(updateData: Update) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json',
+        'x-access-token': localStorage.getItem('token'),
+      }),
+    };
+    return this.http.put(this.mediaURL + 'users', updateData, httpOptions);
   }
 }

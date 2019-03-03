@@ -19,6 +19,13 @@ export interface RegisteredResponse {
 }
 
 export interface UsernameStatus {
-  username:string;
+  username: string;
   available: boolean;
 }
+
+export interface Update {
+  username?: string;
+  password?: string;
+  email?: string;
+}
+
