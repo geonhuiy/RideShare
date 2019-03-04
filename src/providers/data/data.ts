@@ -64,4 +64,14 @@ export class DataProvider {
     };
     return this.http.put(this.mediaURL + 'users', updateData, httpOptions);
   }
+
+  shareRide(data: any) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json',
+        'x-access-token': localStorage.getItem('token'),
+      }),
+    };
+    return this.http.post(this.mediaURL + 'media', data, httpOptions);
+  }
 }

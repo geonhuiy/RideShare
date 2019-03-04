@@ -20,6 +20,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { GetridePage } from '../pages/getride/getride';
 import { ShareridePage } from '../pages/shareride/shareride';
 import { EditProfilePage } from '../pages/edit-profile/edit-profile';
+import { Chooser } from '@ionic-native/chooser';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { EditProfilePage } from '../pages/edit-profile/edit-profile';
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     DataProvider,
+    Chooser
   ]
 })
 export class AppModule {

@@ -11,5 +11,25 @@
 </ion-header>
 
 <ion-content padding>
+  <form #uploadRideForm="ngForm" (submit)="uploadRide()">
+    <h2>Upload Media</h2>
+    <ion-item>
+      <ion-label color="primary" stacked>From</ion-label>
+      <ion-input type="text" [(ngModel)]="from" name="from"  minlength="3" [required] ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" stacked>Where</ion-label>
+      <ion-input type="text" [(ngModel)]="where" name="where"  minlength="3" [required] ></ion-input>
+    </ion-item>
+    <ion-buttons>
+      <ion-label color="primary" stacked>Image of your vehicle</ion-label>
+      <button ion-button type="button" (click)="fileChoose()">Select file!</button>
+    </ion-buttons>
+    <button ion-button type="submit" [disabled]="!fileSelected || !uploadRideForm.valid">Upload</button>
+    <button ion-button type="button" (click)="resetAll()" >Reset</button>
+  </form>
 
+  <ion-card>
+    <img #preview [src]="filedata" >
+</ion-card>
 </ion-content>
