@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { App, NavController, NavParams } from 'ionic-angular';
+import { App, LoadingController, NavController, NavParams } from 'ionic-angular';
 import { User } from '../../interface/user';
 import { DataProvider } from '../../providers/data/data';
 import { LoginRegisterPage } from '../login-register/login-register';
@@ -18,17 +18,25 @@ import { EditProfilePage } from '../edit-profile/edit-profile';
   templateUrl: 'profile.html',
 })
 export class ProfilePage {
+  loading: any;
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     private dataProvider: DataProvider,
-    private app: App) {
+    private app: App,
+    private loadingCtrl: LoadingController) {
   }
 
   profile: Observable<User>;
   profilePic = '';
 
   ionViewDidEnter() {
+    this.createLoading();
+    this.loading.present();
+    setTimeout(() => {
+      this.loading.dismissAll();
+    }, 350);
     this.getUserProfile();
     this.getProfilePics();
   }
@@ -53,12 +61,19 @@ export class ProfilePage {
         ).map(
           object => object.filename,
         )[0];
-        console.log('Loaded profile picture');
       },
     );
   }
+
   openEditProfile() {
-    this.app.getRootNav().push(EditProfilePage);
+    this.app.getRootNav().push(EditProfilePage, { getProfile: this.getUserProfile() });
+  }
+
+  createLoading() {
+    this.loading = this.loadingCtrl.create({
+      content: 'Loading profile',
+      spinner: 'ios',
+    });
   }
 
 }

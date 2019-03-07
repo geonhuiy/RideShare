@@ -6,6 +6,7 @@ import {
   User,
   UsernameStatus,
 } from '../../interface/user';
+import { Pic, SearchParam, TagParam, UploadResponse } from '../../interface/media';
 
 /*
   Generated class for the DataProvider provider.
@@ -17,6 +18,11 @@ import {
 export class DataProvider {
   mediaURL = 'http://media.mw.metropolia.fi/wbma/';
   loggedIn = false;
+  token = {
+    headers: new HttpHeaders({
+      'x-access-token': localStorage.getItem('token')
+    })
+  };
 
   constructor(public http: HttpClient) {
     // Do something
@@ -63,5 +69,31 @@ export class DataProvider {
       }),
     };
     return this.http.put(this.mediaURL + 'users', updateData, httpOptions);
+  }
+
+  uploadMedia(data: any) {
+    return this.http.post<UploadResponse>(this.mediaURL + 'media', data, this.token);
+  }
+
+  getRides(searchParam: SearchParam) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'x-access-token': localStorage.getItem('token'),
+      }),
+    };
+    return this.http.post<Pic[]>(this.mediaURL + 'media/search', searchParam, httpOptions);
+  }
+
+  addTag(tag: TagParam) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'x-access-token': localStorage.getItem('token'),
+      }),
+    };
+    return this.http.post<any>(this.mediaURL + 'tags', tag, httpOptions);
+  }
+
+  findByTag(tag: string) {
+    return this.http.get<Pic[]>(this.mediaURL + 'tags/' + tag);
   }
 }

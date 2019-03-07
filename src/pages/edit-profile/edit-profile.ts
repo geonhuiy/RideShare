@@ -26,10 +26,6 @@ export class EditProfilePage {
   usernameCheck = true;
   @ViewChild('updateform') updateForm;
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad EditProfilePage');
-  }
-
   updateProfile() {
     this.dataProvider.updateUserData(this.updateData).subscribe(
       (res) => {

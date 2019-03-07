@@ -11,6 +11,7 @@
     "no-unused-variable": [
       true
     ],
+    "linebreak-style": false,
     "no-var-requires": false
   },
   "rulesDirectory": [

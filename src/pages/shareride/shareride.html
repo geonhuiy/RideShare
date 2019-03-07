@@ -6,10 +6,22 @@
 -->
 <ion-header>
   <ion-navbar>
-    <ion-title>shareride</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-
+  <ion-item *ngFor="let rides of (ridesArray | async)">
+    <h2>{{ rides.description }}</h2>
+  </ion-item>
+  <form>
+    <ion-item>
+      <ion-label>From</ion-label>
+      <ion-input type="text" [(ngModel)]="ride.start" name="start"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>To</ion-label>
+      <ion-input type="text" [(ngModel)]="ride.destination" name="destination"></ion-input>
+    </ion-item>
+    <button ion-button block (click)="findPassengers()">Search</button>
+  </form>
 </ion-content>
