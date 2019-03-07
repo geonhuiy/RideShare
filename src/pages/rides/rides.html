@@ -5,6 +5,17 @@
   Ionic pages and navigation.
 -->
 <ion-content padding>
-  <button ion-button block (click)="openGetRides()">Get rides</button>
+  <button ion-button block (click)="openGetRides()">search rides</button>
   <button ion-button block (click)="openShareRides()">Share rides</button>
+  <ion-list>
+    <ion-item *ngFor="let item of rideArray | async">
+      <ion-thumbnail item-start>
+        <img src='http://media.mw.metropolia.fi/wbma/uploads/{{ item.file_id  | thumbnail | async }}' item-start="" width="60" height="60">
+      </ion-thumbnail>
+      <h2>{{ getDestination(item.description) }}</h2>
+      <p>{{ item.time_added | date: ('dd.MM.yyyy') }}</p>
+      <p>{{ item.user_id }}</p>
+      <button ion-button clear (click)="viewRide(item.file_id)" item-end>View ride</button>
+    </ion-item>
+  </ion-list>
 </ion-content>

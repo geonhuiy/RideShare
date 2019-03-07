@@ -21,6 +21,8 @@ import { GetridePage } from '../pages/getride/getride';
 import { ShareridePage } from '../pages/shareride/shareride';
 import { EditProfilePage } from '../pages/edit-profile/edit-profile';
 import { Chooser } from '@ionic-native/chooser';
+import { ThumbnailPipe } from '../pipes/thumbnail/thumbnail';
+import { RidedetailsPage } from '../pages/ridedetails/ridedetails';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { Chooser } from '@ionic-native/chooser';
     RidesPage,
     GetridePage,
     ShareridePage,
-    EditProfilePage
+    EditProfilePage,
+    ThumbnailPipe,
+    RidedetailsPage
   ],
   imports: [
     BrowserModule,
@@ -49,7 +53,8 @@ import { Chooser } from '@ionic-native/chooser';
     ProfilePage,
     GetridePage,
     ShareridePage,
-    EditProfilePage
+    EditProfilePage,
+    RidedetailsPage
   ],
   providers: [
     StatusBar,

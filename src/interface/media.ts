@@ -9,7 +9,13 @@ export interface Pic {
   mine_type: string;
   time_added: string;
   screenshot?: string;
-  thumbnails?: string;
+  thumbnails?: Thumbnail;
+}
+
+export interface Thumbnail {
+  w160?: string;
+  w320?: string;
+  w640?: string;
 }
 
 export interface SearchParam {

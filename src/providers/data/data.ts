@@ -52,6 +52,16 @@ export class DataProvider {
     return this.http.get<User>(this.mediaURL + 'users/user', httpOptions);
   }
 
+  getUser(Id: string){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json',
+        'x-access-token': localStorage.getItem('token'),
+      }),
+    };
+    return this.http.get<User>(this.mediaURL + 'users/' + Id, httpOptions);
+  }
+
   getProfilePic() {
     return this.http.get(this.mediaURL + 'tags/profile');
   }
@@ -84,6 +94,16 @@ export class DataProvider {
     return this.http.post<Pic[]>(this.mediaURL + 'media/search', searchParam, httpOptions);
   }
 
+  getAllRides(title: any) {
+    console.log("getting all rides!")
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'x-access-token': localStorage.getItem('token'),
+      }),
+    };
+    return this.http.post<Pic[]>(this.mediaURL + 'media/search', title, httpOptions);
+  }
+
   addTag(tag: TagParam) {
     const httpOptions = {
       headers: new HttpHeaders({
@@ -95,5 +115,9 @@ export class DataProvider {
 
   findByTag(tag: string) {
     return this.http.get<Pic[]>(this.mediaURL + 'tags/' + tag);
+  }
+
+  getSingleMedia(id: any) {
+    return this.http.get<Pic>(this.mediaURL + 'media/' + id);
   }
 }

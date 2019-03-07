@@ -1,0 +1,24 @@
+<!--
+  Generated template for the RidedetailsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>ridedetails</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-card *ngIf="item">
+    <h2>{{ destination }}</h2>
+    <img *ngIf="item.media_type === 'image'" [src] = "url + item.filename">
+    <video *ngIf="item.media_type === 'video' " width="320" height="240" controls>
+      <source [src] = "url + item.filename">
+      Your device does not support the video.
+    </video>
+    <audio *ngIf="item.media_type === 'audio' " [src] = "url + item.filename" controls></audio>
+    <p>{{ uploader }}</p>
+  </ion-card>
+</ion-content>
