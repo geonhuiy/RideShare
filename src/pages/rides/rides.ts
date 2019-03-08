@@ -21,10 +21,12 @@ import { RidedetailsPage } from '../ridedetails/ridedetails';
 })
 export class RidesPage {
   rideArray: Observable<Pic[]>;
+  rides: Pic[];
   title = {
     'title': 'getRide'
   };
   name = '';
+  search = '';
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -37,6 +39,16 @@ export class RidesPage {
 
   getAllFiles() {
     this.rideArray = this.dataProvider.getAllRides(this.title);
+  }
+
+  getSearchFiles(search: string, item: Pic){
+    let res = item.description.toLowerCase().split('"');
+    let data = (res[3] + res[7]);
+    return data.includes(search.toLowerCase());
+  }
+
+  checkSearch(search: string){
+    return search;
   }
 
   getDestination(ride: string) {

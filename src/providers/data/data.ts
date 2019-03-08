@@ -95,7 +95,7 @@ export class DataProvider {
   }
 
   getAllRides(title: any) {
-    console.log("getting all rides!")
+    console.log("getting all rides!");
     const httpOptions = {
       headers: new HttpHeaders({
         'x-access-token': localStorage.getItem('token'),
