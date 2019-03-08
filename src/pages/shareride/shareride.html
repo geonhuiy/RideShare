@@ -32,6 +32,6 @@
   </form>
 
   <ion-card>
-    <img #preview [src]="filedata" >
+    <img #preview [src]="filedata" *ngIf="filedata">
 </ion-card>
 </ion-content>

@@ -22,9 +22,9 @@ import { RidedetailsPage } from '../ridedetails/ridedetails';
 export class RidesPage {
   rideArray: Observable<Pic[]>;
   title = {
-    "title": "getRide"
+    'title': 'getRide'
   };
-  name = "";
+  name = '';
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -39,17 +39,17 @@ export class RidesPage {
     this.rideArray = this.dataProvider.getAllRides(this.title);
   }
 
-  getDestination(ride:string) {
+  getDestination(ride: string) {
     let res = ride.split('"');
-    return (res[3] + " - " + res[7]);
+    return (res[3] + ' - ' + res[7]);
   }
 
-  getUser(Id:string) {
-  this.dataProvider.getUser(Id).subscribe(res => {
-     this.name = res.username;
-     console.log(res.username);
-  });
-  return this.name;
+  getUser(Id: string) {
+    this.dataProvider.getUser(Id).subscribe(res => {
+      this.name = res.username;
+      console.log(res.username);
+    });
+    return this.name;
   }
 
   viewRide(id: string) {
