@@ -1,6 +1,5 @@
-<ion-tabs>
-  <ion-tab [root]="Home" tabIcon="home" tabTitle="Home"></ion-tab>
-  <ion-tab [root]="Rides" tabIcon="car" tabTitle="Rides"></ion-tab>
-  <ion-tab [show]="dataProvider.loggedIn" [root]="Profile" tabIcon="person" tabTitle="Profile"></ion-tab>
-  <ion-tab [show]="!dataProvider.loggedIn" [root]="LoginRegister" tabIcon="log-in" tabTitle="Log in"></ion-tab>
+<ion-tabs >
+  <ion-tab [show]="!dataProvider.onSlides" [root]="Home" tabIcon="home" tabTitle="Home"></ion-tab>
+  <ion-tab [show]="!dataProvider.onSlides" [root]="Rides" tabIcon="car" tabTitle="Rides"></ion-tab>
+  <ion-tab [show]="!dataProvider.onSlides" [root]="Profile" tabIcon="person" tabTitle="Profile"></ion-tab>
 </ion-tabs>
