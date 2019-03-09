@@ -52,7 +52,7 @@ export class DataProvider {
     return this.http.get<User>(this.mediaURL + 'users/user', httpOptions);
   }
 
-  getUser(Id: string){
+  getUser(Id: string) {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-type': 'application/json',
@@ -95,7 +95,7 @@ export class DataProvider {
   }
 
   getAllRides(title: any) {
-    console.log("getting all rides!");
+    console.log('getting all rides!');
     const httpOptions = {
       headers: new HttpHeaders({
         'x-access-token': localStorage.getItem('token'),
@@ -119,5 +119,9 @@ export class DataProvider {
 
   getSingleMedia(id: any) {
     return this.http.get<Pic>(this.mediaURL + 'media/' + id);
+  }
+
+  getVehicles() {
+    return this.http.get(this.mediaURL + 'tags/vehicle');
   }
 }

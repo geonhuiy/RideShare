@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { App, LoadingController, NavController, NavParams } from 'ionic-angular';
+import { ActionSheetController, App, LoadingController, MenuController, NavController, NavParams } from 'ionic-angular';
 import { User } from '../../interface/user';
 import { DataProvider } from '../../providers/data/data';
 import { LoginRegisterPage } from '../login-register/login-register';
 import { Observable } from 'rxjs';
 import { Pic } from '../../interface/media';
 import { EditProfilePage } from '../edit-profile/edit-profile';
+import { VehicleUploadPage } from '../vehicle-upload/vehicle-upload';
 
 /**
  * Generated class for the ProfilePage page.
@@ -25,11 +26,13 @@ export class ProfilePage {
     public navParams: NavParams,
     private dataProvider: DataProvider,
     private app: App,
-    private loadingCtrl: LoadingController) {
+    private loadingCtrl: LoadingController,
+    private actionSheetCtrl: ActionSheetController) {
   }
 
   profile: Observable<User>;
   profilePic = '';
+  userVehicle = '';
 
   ionViewDidEnter() {
     this.createLoading();
@@ -40,6 +43,41 @@ export class ProfilePage {
     this.getUserProfile();
     this.getProfilePics();
   }
+
+  // ************************* Action sheet *************************
+  present() {
+    const actionSheet = this.actionSheetCtrl.create({
+      buttons: [
+        {
+          text: 'Edit profile',
+          role: 'Edit profile',
+          icon: 'create',
+          handler: () => {
+            this.openEditProfile();
+          }
+        },
+        {
+          text: 'Upload vehicle information',
+          icon: 'car',
+          role: 'Upload vehicle information',
+          handler: () => {
+            this.openVehicleUpload();
+          },
+        },
+        {
+          text: 'Log out',
+          icon: 'log-out',
+          role: 'Log out',
+          handler: () => {
+            this.logout();
+            this.dataProvider.loggedIn = false;
+          }
+        }
+      ]
+    });
+    actionSheet.present();
+  }
+  // ************************* Action sheet *************************
 
   logout() {
     localStorage.removeItem('token');
@@ -74,6 +112,24 @@ export class ProfilePage {
       content: 'Loading profile',
       spinner: 'ios',
     });
+  }
+
+  getUserVehicle() {
+    this.dataProvider.getVehicles().subscribe(
+      (response: Pic[]) => {
+        this.userVehicle = response.filter(
+          obj => {
+            return obj.user_id.toString() === localStorage.getItem('userId');
+          },
+        ).map(
+          object => object.filename,
+        )[0];
+      }
+    );
+  }
+
+  openVehicleUpload() {
+    this.app.getRootNav().push(VehicleUploadPage);
   }
 
 }

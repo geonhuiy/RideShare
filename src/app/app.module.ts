@@ -17,12 +17,12 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { RidesPage } from '../pages/rides/rides';
 import { DataProvider } from '../providers/data/data';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { GetridePage } from '../pages/getride/getride';
 import { ShareridePage } from '../pages/shareride/shareride';
 import { EditProfilePage } from '../pages/edit-profile/edit-profile';
 import { Chooser } from '@ionic-native/chooser';
 import { ThumbnailPipe } from '../pipes/thumbnail/thumbnail';
 import { RidedetailsPage } from '../pages/ridedetails/ridedetails';
+import { VehicleUploadPage } from '../pages/vehicle-upload/vehicle-upload';
 
 @NgModule({
   declarations: [
@@ -32,11 +32,11 @@ import { RidedetailsPage } from '../pages/ridedetails/ridedetails';
     LoginRegisterPage,
     TabsPage,
     RidesPage,
-    GetridePage,
     ShareridePage,
     EditProfilePage,
     ThumbnailPipe,
-    RidedetailsPage
+    RidedetailsPage,
+    VehicleUploadPage
   ],
   imports: [
     BrowserModule,
@@ -51,10 +51,10 @@ import { RidedetailsPage } from '../pages/ridedetails/ridedetails';
     LoginRegisterPage,
     RidesPage,
     ProfilePage,
-    GetridePage,
     ShareridePage,
     EditProfilePage,
-    RidedetailsPage
+    RidedetailsPage,
+    VehicleUploadPage
   ],
   providers: [
     StatusBar,

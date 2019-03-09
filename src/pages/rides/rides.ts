@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { GetridePage } from '../getride/getride';
 import { Observable } from 'rxjs';
 import { Pic } from '../../interface/media';
 import { ShareridePage } from '../shareride/shareride';
 import { DataProvider } from '../../providers/data/data';
-import { Title } from '@angular/platform-browser';
 import { RidedetailsPage } from '../ridedetails/ridedetails';
 
 /**
@@ -41,13 +39,13 @@ export class RidesPage {
     this.rideArray = this.dataProvider.getAllRides(this.title);
   }
 
-  getSearchFiles(search: string, item: Pic){
+  getSearchFiles(search: string, item: Pic) {
     let res = item.description.toLowerCase().split('"');
     let data = (res[3] + res[7]);
     return data.includes(search.toLowerCase());
   }
 
-  checkSearch(search: string){
+  checkSearch(search: string) {
     return search;
   }
 
@@ -68,10 +66,6 @@ export class RidesPage {
     this.navCtrl.push(RidedetailsPage, {
       Id: id,
     });
-  }
-
-  openGetRides() {
-    this.navCtrl.push(GetridePage);
   }
 
   openShareRides() {
