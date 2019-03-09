@@ -18,6 +18,7 @@ import { Pic, SearchParam, TagParam, UploadResponse } from '../../interface/medi
 export class DataProvider {
   mediaURL = 'http://media.mw.metropolia.fi/wbma/';
   loggedIn = false;
+  onSlides = false;
   token = {
     headers: new HttpHeaders({
       'x-access-token': localStorage.getItem('token')

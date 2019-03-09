@@ -19,6 +19,7 @@ import { RidedetailsPage } from '../ridedetails/ridedetails';
 })
 export class RidesPage {
   rideArray: Observable<Pic[]>;
+  emptyArray: Observable<Pic[]>;
   rides: Pic[];
   title = {
     'title': 'getRide'
@@ -36,7 +37,11 @@ export class RidesPage {
   }
 
   getAllFiles() {
-    this.rideArray = this.dataProvider.getAllRides(this.title);
+    if(localStorage.getItem('token') != null){
+      this.rideArray = this.dataProvider.getAllRides(this.title);
+    }else{
+      this.rideArray = this.emptyArray;
+    }
   }
 
   getSearchFiles(search: string, item: Pic) {
@@ -54,6 +59,7 @@ export class RidesPage {
     return (res[3] + ' - ' + res[7]);
   }
 
+  /*
   getUser(Id: string) {
     this.dataProvider.getUser(Id).subscribe(res => {
       this.name = res.username;
@@ -61,6 +67,7 @@ export class RidesPage {
     });
     return this.name;
   }
+  */
 
   viewRide(id: string) {
     this.navCtrl.push(RidedetailsPage, {

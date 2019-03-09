@@ -12,7 +12,6 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ProfilePage } from '../pages/profile/profile';
-import { LoginRegisterPage } from '../pages/login-register/login-register';
 import { TabsPage } from '../pages/tabs/tabs';
 import { RidesPage } from '../pages/rides/rides';
 import { DataProvider } from '../providers/data/data';
@@ -29,7 +28,6 @@ import { VehicleUploadPage } from '../pages/vehicle-upload/vehicle-upload';
     MyApp,
     HomePage,
     ProfilePage,
-    LoginRegisterPage,
     TabsPage,
     RidesPage,
     ShareridePage,
@@ -48,7 +46,6 @@ import { VehicleUploadPage } from '../pages/vehicle-upload/vehicle-upload';
     MyApp,
     HomePage,
     TabsPage,
-    LoginRegisterPage,
     RidesPage,
     ProfilePage,
     ShareridePage,

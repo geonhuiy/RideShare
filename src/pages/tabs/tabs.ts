@@ -3,7 +3,6 @@ import { NavController, NavParams } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { ProfilePage } from '../profile/profile';
 import { RidesPage } from '../rides/rides';
-import { LoginRegisterPage } from '../login-register/login-register';
 import { DataProvider } from '../../providers/data/data';
 
 @Component({
@@ -14,7 +13,6 @@ export class TabsPage {
   Home = HomePage;
   Profile = ProfilePage;
   Rides = RidesPage;
-  LoginRegister = LoginRegisterPage;
 
   token = localStorage.getItem('token');
 
@@ -24,7 +22,7 @@ export class TabsPage {
     public dataProvider: DataProvider) {
   }
 
-  ionViewDidLoad() {
+  ionViewWillEnter() {
     if (this.token !== 'undefined' && this.token !== null) {
       console.log('There is a token');
       this.dataProvider.loggedIn = true;
@@ -33,5 +31,4 @@ export class TabsPage {
       this.dataProvider.loggedIn = false;
     }
   }
-
 }

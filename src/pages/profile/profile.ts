@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { ActionSheetController, App, LoadingController, MenuController, NavController, NavParams } from 'ionic-angular';
 import { User } from '../../interface/user';
 import { DataProvider } from '../../providers/data/data';
-import { LoginRegisterPage } from '../login-register/login-register';
 import { Observable } from 'rxjs';
 import { Pic } from '../../interface/media';
 import { EditProfilePage } from '../edit-profile/edit-profile';
@@ -81,6 +80,7 @@ export class ProfilePage {
 
   logout() {
     localStorage.removeItem('token');
+    localStorage.removeItem('userId');
     this.dataProvider.loggedIn = false;
     this.navCtrl.parent.select(0);
   }
