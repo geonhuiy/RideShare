@@ -19,6 +19,8 @@ import {
 export class HomePage {
   rideArray: Observable<Pic[]>;
   emptyArray: Observable<Pic[]>;
+  ownRides = [];
+  comments: any[];
   rides: Pic[];
   title = {
     'title': 'getRide'
@@ -54,11 +56,23 @@ export class HomePage {
   }
 
   getAllFiles() {
+    let i = 0;
     if(this.loggedIn()){
       this.rideArray = this.dataProvider.getAllRides(this.title);
+      this.dataProvider.getComments().subscribe( res =>{
+        while(res[i]){
+          this.ownRides[i] = res[i].file_id;
+          console.log(res[i]);
+          i++;
+        }
+      });
     }else{
       this.rideArray = this.emptyArray;
     }
+  }
+
+  isYourRide(item: Pic){
+    return this.ownRides.includes(item.file_id);
   }
 
   getUser() {
