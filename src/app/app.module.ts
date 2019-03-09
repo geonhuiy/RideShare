@@ -23,6 +23,7 @@ import { Chooser } from '@ionic-native/chooser';
 import { ThumbnailPipe } from '../pipes/thumbnail/thumbnail';
 import { RidedetailsPage } from '../pages/ridedetails/ridedetails';
 import { VehicleUploadPage } from '../pages/vehicle-upload/vehicle-upload';
+import { Camera } from '@ionic-native/camera';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { VehicleUploadPage } from '../pages/vehicle-upload/vehicle-upload';
     StatusBar,
     SplashScreen,
     Chooser,
+    Camera,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     DataProvider,
   ]

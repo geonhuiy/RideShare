@@ -11,18 +11,21 @@
 </ion-header>
 
 <ion-content padding>
-  <form>
+  <form (submit)="upload()">
     <ion-item>
       <ion-label color="primary" stacked>Number of seats</ion-label>
-      <ion-input type="number"></ion-input>
+      <ion-input type="number" [(ngModel)]="vehicle.seatNo" name="seatNo" required></ion-input>
     </ion-item>
     <ion-item>
       <ion-label color="primary" stacked>Vehicle plate number</ion-label>
-      <ion-input type="text"></ion-input>
+      <ion-input type="text" [(ngModel)]="vehicle.plateNo" name="plateNo" required></ion-input>
     </ion-item>
-    <ion-buttons>
-      <ion-label color="primary" stacked>Image of your vehicle</ion-label>
-      <button ion-button type="button"></button>
-    </ion-buttons>
+    <ion-item (click)="present()" class="image-upload" no-lines *ngIf="!filedata">
+      <ion-label color="primary">Click to add an image of your vehicle</ion-label>
+    </ion-item>
+    <ion-card *ngIf="filedata" class="image-upload-after" no-lines (click)="present()">
+      <img [src]="filedata">
+    </ion-card>
+    <button ion-button type="submit">Upload</button>
   </form>
 </ion-content>

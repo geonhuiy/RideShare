@@ -1,3 +1,21 @@
 page-vehicle-upload {
+  .image-upload {
+    background-color: darkgrey;
+    width: 80%;
+    height: 200px;
+    border-radius: 5%;
+    text-align: center;
+    margin: 30px auto;
+
+    ion-label {
+      white-space: initial;
+    }
+  }
+
+  .image-upload-after {
+    width: 80%;
+    border-radius: 5%;
+    margin: 30px auto;
+  }
 
 }

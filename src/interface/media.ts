@@ -24,8 +24,8 @@ export interface SearchParam {
 }
 
 export interface TagParam {
-  file_id: number;
-  tag: string;
+  file_id?: number;
+  tag?: string;
 }
 
 export interface UploadResponse {
