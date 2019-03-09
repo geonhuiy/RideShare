@@ -32,3 +32,15 @@ export interface UploadResponse {
   message: string;
   file_id: number;
 }
+
+export interface CommentResponse {
+  comments: Comment[];
+}
+
+export interface Comment {
+  comment_id: number;
+  file_id: number;
+  user_id: string;
+  comment: string;
+  time_added: string;
+}

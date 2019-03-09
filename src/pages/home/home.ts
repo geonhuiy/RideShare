@@ -65,7 +65,6 @@ export class HomePage {
     if(this.loggedIn()){
       this.dataProvider.getUser(localStorage.getItem('userId')).subscribe(res => {
         this.welcome = "Welcome to RideShare " + res.username + "!";
-        console.log(res.username);
       });
     }else{
       this.welcome = "Welcome to RideShare!"

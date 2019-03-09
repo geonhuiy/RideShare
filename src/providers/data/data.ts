@@ -6,7 +6,7 @@ import {
   User,
   UsernameStatus,
 } from '../../interface/user';
-import { Pic, SearchParam, TagParam, UploadResponse } from '../../interface/media';
+import { Pic, SearchParam, TagParam, UploadResponse, CommentResponse } from '../../interface/media';
 
 /*
   Generated class for the DataProvider provider.
@@ -124,5 +124,18 @@ export class DataProvider {
 
   getVehicles() {
     return this.http.get(this.mediaURL + 'tags/userVehicle');
+  }
+
+  getSeat(comment: any){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'x-access-token': localStorage.getItem('token'),
+      }),
+    };
+    return this.http.post<any>(this.mediaURL + 'comments', comment, httpOptions);
+  }
+
+  getTakenSeats(id: any){
+    return this.http.get<any>(this.mediaURL + 'comments/file/'+ id);
   }
 }

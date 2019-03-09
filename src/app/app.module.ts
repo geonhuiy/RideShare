@@ -23,6 +23,7 @@ import { ThumbnailPipe } from '../pipes/thumbnail/thumbnail';
 import { RidedetailsPage } from '../pages/ridedetails/ridedetails';
 import { VehicleUploadPage } from '../pages/vehicle-upload/vehicle-upload';
 import { Camera } from '@ionic-native/camera';
+import { UsernamePipe } from '../pipes/username/username';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { Camera } from '@ionic-native/camera';
     ShareridePage,
     EditProfilePage,
     ThumbnailPipe,
+    UsernamePipe,
     RidedetailsPage,
     VehicleUploadPage
   ],
