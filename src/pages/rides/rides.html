@@ -18,7 +18,7 @@
         </ion-thumbnail>
         <h2>{{ getDestination(item.description) }}</h2>
         <p>{{ item.time_added | date: ('dd.MM.yyyy') }}</p>
-        <p>{{ item.user_id }}</p>
+        <p>{{ item.user_id | username | async  }}</p>
         <button ion-button clear (click)="viewRide(item.file_id)" item-end>View ride</button>
       </ion-item>
     </div>

@@ -20,5 +20,11 @@
     </video>
     <audio *ngIf="item.media_type === 'audio' " [src] = "url + item.filename" controls></audio>
     <p>{{ uploader }}</p>
+    <button ion-button (click)="getSeat()">take spot!</button>
+    <ion-list>
+      <ion-item *ngFor ="let comment of takenSeats | async">
+          <p>{{ comment.user_id | username | async }}</p>
+      </ion-item>
+    </ion-list>
   </ion-card>
 </ion-content>

@@ -17,11 +17,17 @@ import { Pic } from "../../interface/media";
 })
 export class RidedetailsPage {
 
+  comment = {
+    'file_id': 'getRide',
+    'comment': 'dibs'
+  };
   Id: string;
   url = 'http://media.mw.metropolia.fi/wbma/uploads/'
   item: Pic;
   uploader: string;
   destination: string;
+  test: any;
+  takenSeats: Observable<Comment[]>;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -30,6 +36,7 @@ export class RidedetailsPage {
 
   ionViewDidLoad() {
     this.getDetails();
+    this.getTakenSeats();
   }
 
   getDetails(){
@@ -46,5 +53,16 @@ export class RidedetailsPage {
   getDestination(ride:string) {
     let res = ride.split('"');
     this.destination = (res[3] + " - " + res[7]);
+  }
+
+  getTakenSeats(){
+    this.takenSeats = this.dataProvider.getTakenSeats(this.Id)
+  }
+
+  getSeat(){
+    this.comment.file_id = this.Id;
+    this.dataProvider.getSeat(this.comment).subscribe(res => {
+      console.log(res);
+    });
   }
 }

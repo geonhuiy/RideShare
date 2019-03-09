@@ -22,6 +22,7 @@ import { Chooser } from '@ionic-native/chooser';
 import { ThumbnailPipe } from '../pipes/thumbnail/thumbnail';
 import { RidedetailsPage } from '../pages/ridedetails/ridedetails';
 import { VehicleUploadPage } from '../pages/vehicle-upload/vehicle-upload';
+import { UsernamePipe } from '../pipes/username/username';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { VehicleUploadPage } from '../pages/vehicle-upload/vehicle-upload';
     ShareridePage,
     EditProfilePage,
     ThumbnailPipe,
+    UsernamePipe,
     RidedetailsPage,
     VehicleUploadPage
   ],
