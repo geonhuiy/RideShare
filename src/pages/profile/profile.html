@@ -16,12 +16,18 @@
 
 
 <ion-content padding>
-  <ion-item *ngIf="(profile | async) as prof ">
+  <ion-item *ngIf="(profile | async) as prof " no-lines>
     <ion-thumbnail item-start>
       <img [src]="dataProvider.mediaURL + 'uploads/' + profilePic">
     </ion-thumbnail>
     <h2>{{ prof.username }}</h2>
     <p>{{ prof.full_name }}</p>
     <p> {{ prof.email }}</p>
+  </ion-item>
+  <ion-item no-lines>
+    <ion-thumbnail>
+      <img [src]="dataProvider.mediaURL + 'uploads/' + userVehiclePic">
+    </ion-thumbnail>
+    <p>{{ userVehicle }}</p>
   </ion-item>
 </ion-content>

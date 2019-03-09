@@ -123,6 +123,6 @@ export class DataProvider {
   }
 
   getVehicles() {
-    return this.http.get(this.mediaURL + 'tags/vehicle');
+    return this.http.get(this.mediaURL + 'tags/userVehicle');
   }
 }

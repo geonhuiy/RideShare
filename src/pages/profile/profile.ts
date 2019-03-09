@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { Pic } from '../../interface/media';
 import { EditProfilePage } from '../edit-profile/edit-profile';
 import { VehicleUploadPage } from '../vehicle-upload/vehicle-upload';
+import { Vehicle } from '../../interface/vehicle';
 
 /**
  * Generated class for the ProfilePage page.
@@ -31,6 +32,7 @@ export class ProfilePage {
 
   profile: Observable<User>;
   profilePic = '';
+  userVehiclePic = '';
   userVehicle = '';
 
   ionViewDidEnter() {
@@ -41,6 +43,7 @@ export class ProfilePage {
     }, 350);
     this.getUserProfile();
     this.getProfilePics();
+    this.getUserVehiclePic();
   }
 
   // ************************* Action sheet *************************
@@ -69,13 +72,13 @@ export class ProfilePage {
           role: 'Log out',
           handler: () => {
             this.logout();
-            this.dataProvider.loggedIn = false;
           }
         }
       ]
     });
     actionSheet.present();
   }
+
   // ************************* Action sheet *************************
 
   logout() {
@@ -103,6 +106,20 @@ export class ProfilePage {
     );
   }
 
+  getUserVehiclePic() {
+    this.dataProvider.getVehicles().subscribe(
+      (response: Pic[]) => {
+        this.userVehiclePic = response.filter(
+          obj => {
+            return obj.user_id.toString() === localStorage.getItem('userId');
+          },
+        ).map(
+          object => object.filename,
+        )[0];
+      }
+    );
+  }
+
   openEditProfile() {
     this.app.getRootNav().push(EditProfilePage, { getProfile: this.getUserProfile() });
   }
@@ -112,20 +129,6 @@ export class ProfilePage {
       content: 'Loading profile',
       spinner: 'ios',
     });
-  }
-
-  getUserVehicle() {
-    this.dataProvider.getVehicles().subscribe(
-      (response: Pic[]) => {
-        this.userVehicle = response.filter(
-          obj => {
-            return obj.user_id.toString() === localStorage.getItem('userId');
-          },
-        ).map(
-          object => object.filename,
-        )[0];
-      }
-    );
   }
 
   openVehicleUpload() {
