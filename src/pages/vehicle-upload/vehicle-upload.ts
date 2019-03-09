@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { ActionSheetController, LoadingController, NavController, NavParams, Platform } from 'ionic-angular';
+import { DataProvider } from '../../providers/data/data';
+import { Vehicle } from '../../interface/vehicle';
 
 /**
  * Generated class for the VehicleUploadPage page.
@@ -13,12 +15,51 @@ import { NavController, NavParams } from 'ionic-angular';
   templateUrl: 'vehicle-upload.html',
 })
 export class VehicleUploadPage {
+  loading: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              private loadingCtrl: LoadingController,
+              private platform: Platform,
+              private dataProvider: DataProvider,
+              private actionSheetCtrl: ActionSheetController) {
+    this.loading = loadingCtrl.create({
+      content: 'Uploading',
+      spinner: 'ios'
+    });
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad VehicleUploadPage');
+  filedata = '';
+  vehicle: Vehicle;
+  // ************************* Action sheet *************************
+  present() {
+    const actionsheet = this.actionSheetCtrl.create({
+      title: 'Choose image upload',
+      buttons: [
+        {
+          text: 'Choose from gallery',
+          icon: 'image',
+          handler: () => {
+            // Do something
+          },
+        },
+        {
+          text: 'Take picture from camera',
+          icon: 'camera',
+          handler: () => {
+            // Do something
+          }
+        }
+      ]
+    });
+    actionsheet.present();
+  }
+
+  // ************************* Action sheet *************************
+
+  upload() {
+    const formData = new FormData();
+
   }
 
 }
