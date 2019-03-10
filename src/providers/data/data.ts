@@ -138,4 +138,13 @@ export class DataProvider {
   getTakenSeats(id: any){
     return this.http.get<any>(this.mediaURL + 'comments/file/'+ id);
   }
+
+  getComments(){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'x-access-token': localStorage.getItem('token'),
+      }),
+    };
+    return this.http.get<any>(this.mediaURL + 'comments', httpOptions);
+  }
 }
