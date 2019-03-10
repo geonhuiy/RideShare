@@ -46,9 +46,9 @@ export class HomePage {
   }
 
   ionViewDidEnter() {
-    if(!this.loggedIn()){
+    if (!this.loggedIn()) {
       this.dataProvider.onSlides = true;
-    }else{
+    } else {
       this.dataProvider.onSlides = false;
       this.getUser();
       this.getAllFiles();
@@ -57,36 +57,36 @@ export class HomePage {
 
   getAllFiles() {
     let i = 0;
-    if(this.loggedIn()){
+    if (this.loggedIn()) {
       this.rideArray = this.dataProvider.getAllRides(this.title);
-      this.dataProvider.getComments().subscribe( res =>{
-        while(res[i]){
+      this.dataProvider.getComments().subscribe(res => {
+        while (res[i]) {
           this.ownRides[i] = res[i].file_id;
           console.log(res[i]);
           i++;
         }
       });
-    }else{
+    } else {
       this.rideArray = this.emptyArray;
     }
   }
 
-  isYourRide(item: Pic){
+  /*isYourRide(item: Pic){
     return this.ownRides.includes(item.file_id);
-  }
+  }*/
 
   getUser() {
-    if(this.loggedIn()){
+    if (this.loggedIn()) {
       this.dataProvider.getUser(localStorage.getItem('userId')).subscribe(res => {
-        this.welcome = "Welcome to RideShare " + res.username + "!";
+        this.welcome = 'Welcome to RideShare ' + res.username + '!';
       });
-    }else{
-      this.welcome = "Welcome to RideShare!"
+    } else {
+      this.welcome = 'Welcome to RideShare!';
     }
   }
 
-  loggedIn(){
-    return (localStorage.getItem('token') != null  && localStorage.getItem('userId')  != null);
+  loggedIn() {
+    return (localStorage.getItem('token') != null && localStorage.getItem('userId') != null);
   }
 
   getDestination(ride: string) {
@@ -176,7 +176,7 @@ export class HomePage {
   presentAlert(message: string) {
     const alert = this.alertCtrl.create({
       title: message,
-      buttons: ['OK'],
+      buttons: [ 'OK' ],
     });
     alert.present();
   }
