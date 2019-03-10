@@ -25,10 +25,10 @@
     <p> {{ prof.email }}</p>
   </ion-item>
   <ion-item no-lines>
-    <ion-thumbnail>
+    <ion-thumbnail *ngIf="userVehiclePic">
       <img [src]="dataProvider.mediaURL + 'uploads/' + userVehiclePic">
     </ion-thumbnail>
-    <p>Vehicle plate number: {{ userVehicle.plateNo }}</p>
-    <p>Number of seats: {{ userVehicle.seatNo }}</p>
+    <p *ngIf="userVehicle">Vehicle plate number: {{ userVehicle.plateNo }}</p>
+    <p *ngIf="userVehicle">Number of seats: {{ userVehicle.seatNo }}</p>
   </ion-item>
 </ion-content>
