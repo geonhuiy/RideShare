@@ -61,8 +61,10 @@ export class HomePage {
       this.rideArray = this.dataProvider.getAllRides(this.title);
       this.dataProvider.getComments().subscribe(res => {
         while (res[i]) {
+          if(!this.ownRides.includes(res[i].file_id)){
           this.ownRides[i] = res[i].file_id;
-          console.log(res[i]);
+        }
+          console.log(this.ownRides);
           i++;
         }
       });
@@ -71,9 +73,9 @@ export class HomePage {
     }
   }
 
-  /*isYourRide(item: Pic){
+  isYourRide(item: Pic){
     return this.ownRides.includes(item.file_id);
-  }*/
+  }
 
   getUser() {
     if (this.loggedIn()) {

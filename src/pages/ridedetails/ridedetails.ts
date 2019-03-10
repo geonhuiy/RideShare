@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { AlertController, NavController, NavParams, Refresher } from 'ionic-angular';
 import { DataProvider } from "../../providers/data/data";
 import { Observable } from "rxjs";
 import { Pic } from "../../interface/media";
@@ -27,16 +27,20 @@ export class RidedetailsPage {
   uploader: string;
   destination: string;
   test: any;
+  commented: boolean;
   takenSeats: Observable<Comment[]>;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
-              private dataProvider: DataProvider) {
+              private dataProvider: DataProvider,
+              private alertCtrl: AlertController) {
   }
 
   ionViewDidLoad() {
     this.getDetails();
     this.getTakenSeats();
+    this.comment.file_id = this.Id;
+    this.checkComments();
   }
 
   getDetails(){
@@ -60,9 +64,41 @@ export class RidedetailsPage {
   }
 
   getSeat(){
-    this.comment.file_id = this.Id;
-    this.dataProvider.getSeat(this.comment).subscribe(res => {
-      console.log(res);
+    if(!this.commented){
+      console.log("no comments were found");
+      this.dataProvider.getSeat(this.comment).subscribe(res => {
+        console.log(res);
+        this.ionViewDidLoad();
+      });
+    }else{
+      this.presentAlert('You already have taken a spot!');
+    }
+  }
+
+  checkComments(){
+    console.log("checking for comments");
+    this.dataProvider.getTakenSeats(this.Id).subscribe(data => {
+      console.log("subscribe");
+      if(data){
+        console.log("found data");
+        data.forEach(element => {
+          console.log(element.user_id + " - " + localStorage.getItem("userId"));
+          if(element.user_id == localStorage.getItem("userId")) {
+            console.log("true");
+            this.commented = true;
+          }else{
+            console.log("false");
+          };
+        });
+      };
     });
+  }
+
+  presentAlert(message: string) {
+    const alert = this.alertCtrl.create({
+      title: message,
+      buttons: [ 'OK' ],
+    });
+    alert.present();
   }
 }

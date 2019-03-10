@@ -14,8 +14,7 @@
     <h3>Your rides</h3>
     <ion-list>
         <div *ngFor="let item of rideArray | async">
-          <!--ion-item *ngIf="isYourRide(item)"-->
-          <ion-item>
+          <ion-item *ngIf="isYourRide(item)">
           <ion-thumbnail item-start>
             <img src='http://media.mw.metropolia.fi/wbma/uploads/{{ item.file_id  | thumbnail | async }}' item-start="" width="60" height="60">
           </ion-thumbnail>
