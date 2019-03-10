@@ -28,6 +28,7 @@
     <ion-thumbnail>
       <img [src]="dataProvider.mediaURL + 'uploads/' + userVehiclePic">
     </ion-thumbnail>
-    <p>{{ userVehicle }}</p>
+    <p>Vehicle plate number: {{ userVehicle.plateNo }}</p>
+    <p>Number of seats: {{ userVehicle.seatNo }}</p>
   </ion-item>
 </ion-content>

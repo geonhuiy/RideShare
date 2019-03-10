@@ -33,7 +33,7 @@ export class ProfilePage {
   profile: Observable<User>;
   profilePic = '';
   userVehiclePic = '';
-  userVehicle = '';
+  userVehicle: Vehicle = { seatNo: null, plateNo: null };
 
   ionViewDidEnter() {
     this.createLoading();
@@ -44,6 +44,7 @@ export class ProfilePage {
     this.getUserProfile();
     this.getProfilePics();
     this.getUserVehiclePic();
+    this.getUserVehicle();
   }
 
   // ************************* Action sheet *************************
@@ -115,6 +116,23 @@ export class ProfilePage {
           },
         ).map(
           object => object.filename,
+        )[0];
+      }
+    );
+  }
+
+  getUserVehicle() {
+    this.dataProvider.getVehicles().subscribe(
+      (response: any) => {
+        console.log(response);
+        (this.userVehicle) = response.filter(
+          obj => {
+            return obj.user_id.toString() === localStorage.getItem('userId');
+          }
+        ).map(
+          (object) => {
+            return JSON.parse(object.description);
+          }
         )[0];
       }
     );
