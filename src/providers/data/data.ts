@@ -126,7 +126,7 @@ export class DataProvider {
     return this.http.get(this.mediaURL + 'tags/userVehicle');
   }
 
-  getSeat(comment: any){
+  getSeat(comment: any) {
     const httpOptions = {
       headers: new HttpHeaders({
         'x-access-token': localStorage.getItem('token'),
@@ -135,11 +135,11 @@ export class DataProvider {
     return this.http.post<any>(this.mediaURL + 'comments', comment, httpOptions);
   }
 
-  getTakenSeats(id: any){
-    return this.http.get<any>(this.mediaURL + 'comments/file/'+ id);
+  getTakenSeats(id: any) {
+    return this.http.get<any>(this.mediaURL + 'comments/file/' + id);
   }
 
-  getComments(){
+  getComments() {
     const httpOptions = {
       headers: new HttpHeaders({
         'x-access-token': localStorage.getItem('token'),
