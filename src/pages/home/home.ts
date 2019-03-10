@@ -71,15 +71,16 @@ export class HomePage {
     }
   }
 
-  /*isYourRide(item: Pic){
+  isYourRide(item: Pic) {
     return this.ownRides.includes(item.file_id);
-  }*/
+  }
 
   getUser() {
     if (this.loggedIn()) {
-      this.dataProvider.getUser(localStorage.getItem('userId')).subscribe(res => {
-        this.welcome = 'Welcome to RideShare ' + res.username + '!';
-      });
+      this.dataProvider.getUser(localStorage.getItem('userId')).subscribe(
+        res => {
+          this.welcome = 'Welcome to RideShare ' + res.username + '!';
+        });
     } else {
       this.welcome = 'Welcome to RideShare!';
     }
