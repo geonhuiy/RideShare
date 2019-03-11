@@ -1,13 +1,17 @@
 page-profile {
   $circle-height: 180px;
-  .profPic {
-    border-radius: 50%;
-    width: 180px;
-    height: $circle-height;
+  .profPic_container {
     margin: 0 auto;
     text-align: center;
-  }
+    width: 180px;
 
+    .profPic {
+      border-radius: 50%;
+      height: $circle-height;
+    }
+
+  }
+  
   .profPic_empty {
     @extend .profPic;
     background-color: darkgrey;
@@ -19,4 +23,5 @@ page-profile {
       vertical-align: middle;
     }
   }
+
 }
