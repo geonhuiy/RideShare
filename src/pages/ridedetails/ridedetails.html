@@ -22,7 +22,8 @@
     <audio *ngIf="item.media_type === 'audio' " [src] = "url + item.filename" controls></audio>
     <p>{{ uploader }}</p>
     <p>{{ rideDescription }}</p>
-    <button *ngIf="!commented" ion-button (click)="getSeat()">take spot!</button>
+    <button *ngIf="!commented" ion-button (click)="getSeat()">take spot!</button><br>
+    <h2>Taken Seats</h2>
     <ion-list>
       <ion-item *ngFor ="let comment of takenSeats | async">
           <p>{{ comment.user_id | username | async }}</p>
