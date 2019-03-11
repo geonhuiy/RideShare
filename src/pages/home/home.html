@@ -26,7 +26,7 @@
         </ion-item>
       </div>
     </ion-list>
-    <h3>Expired rides</h3>
+    <h3>Previous rides</h3>
     <ion-list>
         <div *ngFor="let item of (rideArray | async)?.reverse()">
           <ion-item *ngIf="isExpiredRide(item)">

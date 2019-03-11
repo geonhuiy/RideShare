@@ -86,7 +86,9 @@ export class HomePage {
   isExpiredRide(item: Pic) {
     let date = new Date(this.today.getFullYear()+'-'+(this.today.getMonth()+1)+'-'+this.today.getDate());
     let date1 = new Date(JSON.parse(item.description).timeDate);
-    return (date1 < date);
+    if(date1 < date){
+      return this.ownRides.includes(item.file_id);
+    }
   }
 
   getUser() {
