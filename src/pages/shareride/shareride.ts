@@ -41,6 +41,7 @@ export class ShareridePage {
   rideDetail: RideDetails = {
     start: null,
     destination: null,
+    timeDate: null,
     timeAdded: null,
     timeReached: null,
     rideDescription: null,
