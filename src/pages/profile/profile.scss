@@ -1,27 +1,51 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
 page-profile {
   $circle-height: 180px;
+
   .profPic_container {
     margin: 0 auto;
     text-align: center;
-    width: 180px;
-
-    .profPic {
-      border-radius: 50%;
-      height: $circle-height;
-    }
-
   }
-  
+
+  .profPic {
+    border-radius: 50%;
+    height: $circle-height;
+    width: $circle-height;
+    border: yellow 2px solid;
+  }
+
+
   .profPic_empty {
     @extend .profPic;
     background-color: darkgrey;
     line-height: $circle-height;
+    margin: 0 auto;
+    text-align: center;
 
     p {
       line-height: 1.5;
       display: inline-block;
       vertical-align: middle;
     }
+  }
+
+  .userDetail {
+    text-align: center;
+    font-family: Roboto, sans-serif;
+  }
+
+  #username {
+    @extend .userDetail;
+    margin-top: 20px;
+    font-size: 20px;
+  }
+
+  #fullname {
+    @extend .userDetail;
+  }
+
+  #email {
+    @extend .userDetail;
   }
 
 }
