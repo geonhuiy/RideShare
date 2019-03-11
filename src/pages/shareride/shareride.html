@@ -16,11 +16,15 @@
 <form (submit)="upload()">
   <ion-item>
     <ion-label color="primary" stacked>Going from</ion-label>
-    <ion-input type="string" [ngModel]="rideDetail.start" name="start" required></ion-input>
+    <ion-input type="string" [(ngModel)]="rideDetail.start" name="start" required></ion-input>
   </ion-item>
   <ion-item>
     <ion-label color="primary" stacked>Going to</ion-label>
     <ion-input type="string" [(ngModel)]="rideDetail.destination" name="destination" required></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label color="primary" stacked>Date of the ride</ion-label>
+    <ion-input type="Date" [(ngModel)]="rideDetail.timeDate" name="date"  minlength="3" [required] ></ion-input>
   </ion-item>
   <ion-item>
     <ion-label color="primary" stacked>Time leaving</ion-label>
