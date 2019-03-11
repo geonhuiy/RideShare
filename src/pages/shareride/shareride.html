@@ -8,30 +8,31 @@
   <ion-navbar>
     <ion-title>shareride</ion-title>
     <ion-spinner *ngIf="loading"></ion-spinner>
-    
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <form #uploadRideForm="ngForm" (submit)="uploadRide()">
-    <h2>Upload Media</h2>
-    <ion-item>
-      <ion-label color="primary" stacked>From</ion-label>
-      <ion-input type="text" [(ngModel)]="from" name="from"  minlength="3" [required] ></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label color="primary" stacked>Where</ion-label>
-      <ion-input type="text" [(ngModel)]="where" name="where"  minlength="3" [required] ></ion-input>
-    </ion-item>
-    <ion-buttons>
-      <ion-label color="primary" stacked>Image of your vehicle</ion-label>
-      <button ion-button type="button" (click)="fileChoose()">Select file!</button>
-    </ion-buttons>
-    <button ion-button type="submit" [disabled]="!fileSelected || !uploadRideForm.valid">Upload</button>
-    <button ion-button type="button" (click)="resetAll()" >Reset</button>
-  </form>
 
-  <ion-card>
-    <img #preview [src]="filedata" *ngIf="filedata">
-</ion-card>
+<form (submit)="upload()">
+  <ion-item>
+    <ion-label color="primary" stacked>Going from</ion-label>
+    <ion-input type="string" [ngModel]="rideDetail.start" name="start" required></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label color="primary" stacked>Going to</ion-label>
+    <ion-input type="string" [(ngModel)]="rideDetail.destination" name="destination" required></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label color="primary" stacked>Additional details about the ride</ion-label>
+    <ion-input type="string" [(ngModel)]="rideDetail.rideDescription" name="rideDetail"></ion-input>
+  </ion-item>
+  <ion-item (click)="present()" class="rideUpload" no-lines *ngIf="!filedata">
+    <ion-label color="primary">Click to add an image</ion-label>
+  </ion-item>
+  <ion-card *ngIf="filedata" class="rideUpload-after" no-lines (click)="present()">
+    <img [src]="filedata">
+  </ion-card>
+  <button ion-button type="submit">Submit ride</button>
+</form>
+
 </ion-content>
