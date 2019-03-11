@@ -20,9 +20,7 @@
   <ion-item *ngIf="(profile | async) as prof " no-lines>
 
     <div *ngIf="profilePic" class="profPic">
-      <ion-thumbnail item-start>
-        <img [src]="dataProvider.mediaURL + 'uploads/' + profilePic">
-      </ion-thumbnail>
+        <img [src]="dataProvider.mediaURL + 'uploads/' + profilePic" style="max-height: 100%; max-width: 100%;">
     </div>
 
     <div class="profPic_empty" (click)="presentUpload()" *ngIf="!profilePic">
