@@ -17,7 +17,8 @@
           <img src='http://media.mw.metropolia.fi/wbma/uploads/{{ item.file_id  | thumbnail | async }}' item-start="" width="60" height="60">
         </ion-thumbnail>
         <h2>{{ getDestination(item.description) }}</h2>
-        <p>{{ item.time_added | date: ('dd.MM.yyyy') }}</p>
+        <p>{{ getDate(item.description) | date: ('dd.MM.yyyy') }}</p>
+        <p>{{ getTime(item.description) }}</p>
         <p>{{ item.user_id | username | async  }}</p>
         <button ion-button clear (click)="viewRide(item.file_id)" item-end>View ride</button>
       </ion-item>

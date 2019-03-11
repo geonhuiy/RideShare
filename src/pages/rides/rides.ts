@@ -58,6 +58,14 @@ export class RidesPage {
     return (JSON.parse(ride).start + ' - ' + JSON.parse(ride).destination);
   }
 
+  getDate(ride: string) {
+    return (JSON.parse(ride).timeDate);
+  }
+
+  getTime(ride: string) {
+    return (JSON.parse(ride).timeAdded + ' - ' + JSON.parse(ride).timeReached);
+  }
+
   /*
   getUser(Id: string) {
     this.dataProvider.getUser(Id).subscribe(res => {
