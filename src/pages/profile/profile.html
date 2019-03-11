@@ -19,13 +19,13 @@
 
   <ion-item *ngIf="(profile | async) as prof " no-lines>
 
-    <div *ngIf="profilePic" class="profPic" no-lines>
+    <div *ngIf="profilePic" class="profPic">
       <ion-thumbnail item-start>
         <img [src]="dataProvider.mediaURL + 'uploads/' + profilePic">
       </ion-thumbnail>
     </div>
 
-    <div class="profPic_empty">
+    <div class="profPic_empty" (click)="presentUpload()" *ngIf="!profilePic">
       <p text-wrap>Click to add a profile image</p>
     </div>
 

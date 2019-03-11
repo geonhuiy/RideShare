@@ -34,7 +34,6 @@ export class VehicleUploadPage {
 
   filedata = '';
   vehicle: Vehicle = { seatNo: null, plateNo: null };
-  tag: string;
   vehicleTag: TagParam = { tag: 'vehicle' };
   vehicleBlob: Blob;
 
