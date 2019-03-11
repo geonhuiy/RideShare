@@ -24,6 +24,8 @@ import { RidedetailsPage } from '../pages/ridedetails/ridedetails';
 import { VehicleUploadPage } from '../pages/vehicle-upload/vehicle-upload';
 import { Camera } from '@ionic-native/camera';
 import { UsernamePipe } from '../pipes/username/username';
+import { GoogleMaps } from '@ionic-native/google-maps';
+
 
 @NgModule({
   declarations: [
@@ -61,6 +63,7 @@ import { UsernamePipe } from '../pipes/username/username';
     SplashScreen,
     Chooser,
     Camera,
+    GoogleMaps,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     DataProvider,
   ]

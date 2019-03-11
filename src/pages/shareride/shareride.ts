@@ -1,18 +1,21 @@
-import { Component } from '@angular/core';
-import { ActionSheetController, NavController, NavParams } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import {
+  ActionSheetController,
+  NavController,
+  NavParams,
+  Platform,
+} from 'ionic-angular';
 import { DataProvider } from '../../providers/data/data';
-import { Pic, SearchParam } from '../../interface/media';
-import { Observable } from 'rxjs';
-import { selectValueAccessor } from '@angular/forms/src/directives/shared';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { RideDetails } from '../../interface/ride';
-
-/**
- * Generated class for the ShareridePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import {
+  GoogleMap, GoogleMapOptions,
+  GoogleMaps,
+  GoogleMapsEvent,
+  LatLng, LocationService,
+  Marker,
+  MarkerOptions, MyLocation,
+} from '@ionic-native/google-maps';
 
 @Component({
   selector: 'page-shareride',
@@ -25,18 +28,29 @@ export class ShareridePage {
     public navParams: NavParams,
     private dataProvider: DataProvider,
     private camera: Camera,
-    private  actionSheetCtrl: ActionSheetController) {
+    private  actionSheetCtrl: ActionSheetController,
+    private  googleMaps: GoogleMaps,
+    private platform: Platform) {
   }
 
   filedata = '';
+  rideBlob: Blob;
+  @ViewChild('map_canvas') element;
+  map: GoogleMap;
+
   rideDetail: RideDetails = {
     start: null,
     destination: null,
     timeAdded: null,
     timeReached: null,
-    rideDescription: null
+    rideDescription: null,
   };
-  rideBlob: Blob;
+
+  ionViewDidLoad() {
+    this.platform.ready().then(() => {
+      this.initMap();
+    });
+  }
 
   // ************************* Action sheet *************************
   present() {
@@ -64,6 +78,7 @@ export class ShareridePage {
 
   // ************************* Action sheet *************************
 
+  // ************************* Image upload *************************
   upload() {
     const formData = new FormData();
     formData.append('title', 'getRide');
@@ -128,4 +143,58 @@ export class ShareridePage {
     }
     return new Blob([ ab ], { type: 'image/jpeg' });
   }
+
+  // ************************* Image upload *************************
+
+  // ************************* Maps *************************
+
+  /*initMap() {
+    let map: GoogleMap = this.googleMaps.create(this.element.nativeElement);
+    map.one(GoogleMapsEvent.MAP_READY).then(
+      (data: any) => {
+        let coordinates: LatLng = new LatLng(33.6396965, -84.4304574);
+        let position = {
+          target: coordinates,
+          zoom: 17,
+        };
+        map.animateCamera(position);
+
+        let markerOptions: MarkerOptions = {
+          position: coordinates,
+          title: 'Some point',
+          icon: 'pin',
+        };
+        const marker = map.addMarker(markerOptions).then(
+          ((marker: Marker) => {
+            marker.showInfoWindow();
+          }),
+        );
+      });
+  }*/
+
+  initMap() {
+    LocationService.getMyLocation().then(
+      (currentLocation: MyLocation) => {
+        let options: GoogleMapOptions = {
+          camera: {
+            target: currentLocation.latLng,
+            zoom: 10,
+          },
+        };
+        this.map = GoogleMaps.create('map_canvas', options);
+        // Adding markers
+        /*let markerOptions: MarkerOptions = {
+          position: currentLocation.latLng,
+          title: 'Exposing my house',
+        };
+        const marker = this.map.addMarker(markerOptions).then(
+          ((marker: Marker) => {
+            marker.showInfoWindow();
+          })
+        );*/
+      },
+    );
+  }
+
+  // ************************* Maps *************************
 }
