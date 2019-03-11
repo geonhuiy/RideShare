@@ -45,8 +45,8 @@ export class RidesPage {
   }
 
   getSearchFiles(search: string, item: Pic) {
-    let res = item.description.toLowerCase().split('"');
-    let data = (res[3] + res[7]);
+    let res = item.description;
+    let data = (JSON.parse(res).start + JSON.parse(res).destination).toLowerCase();
     return data.includes(search.toLowerCase());
   }
 
@@ -55,8 +55,7 @@ export class RidesPage {
   }
 
   getDestination(ride: string) {
-    let res = ride.split('"');
-    return (res[3] + ' - ' + res[7]);
+    return (JSON.parse(ride).start + ' - ' + JSON.parse(ride).destination);
   }
 
   /*
