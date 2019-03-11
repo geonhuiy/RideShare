@@ -43,6 +43,7 @@ export class ProfilePage {
   profilePic = '';
   userVehiclePic = '';
   userVehicle: Vehicle = { seatNo: null, plateNo: null };
+  userThumbnail = '';
   profileTag: TagParam = { tag: '', file_id: null };
   filedata = '';
   profileBlob: Blob;
