@@ -11,7 +11,7 @@
     <ion-input type="text" [(ngModel)]="search" name="search"></ion-input>
   </ion-item>
   <ion-list>
-    <div *ngFor="let item of rideArray | async">
+    <div *ngFor="let item of (rideArray | async)?.reverse()">
       <ion-item *ngIf="getSearchFiles(search,item)">
         <ion-thumbnail item-start>
           <img src='http://media.mw.metropolia.fi/wbma/uploads/{{ item.file_id  | thumbnail | async }}' item-start="" width="60" height="60">
