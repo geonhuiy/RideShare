@@ -16,19 +16,31 @@
 
 
 <ion-content padding>
+
   <ion-item *ngIf="(profile | async) as prof " no-lines>
-    <ion-thumbnail item-start>
-      <img [src]="dataProvider.mediaURL + 'uploads/' + profilePic">
-    </ion-thumbnail>
+
+    <div *ngIf="profilePic" class="profPic" no-lines>
+      <ion-thumbnail item-start>
+        <img [src]="dataProvider.mediaURL + 'uploads/' + profilePic">
+      </ion-thumbnail>
+    </div>
+
+    <div class="profPic_empty">
+      <p text-wrap>Click to add a profile image</p>
+    </div>
+
     <h2>{{ prof.username }}</h2>
     <p>{{ prof.full_name }}</p>
     <p> {{ prof.email }}</p>
+
   </ion-item>
-  <ion-item no-lines>
-    <ion-thumbnail *ngIf="userVehiclePic">
+
+  <ion-item no-lines *ngIf="userVehiclePic">
+    <ion-thumbnail>
       <img [src]="dataProvider.mediaURL + 'uploads/' + userVehiclePic">
     </ion-thumbnail>
     <p *ngIf="userVehicle">Vehicle plate number: {{ userVehicle.plateNo }}</p>
     <p *ngIf="userVehicle">Number of seats: {{ userVehicle.seatNo }}</p>
   </ion-item>
+
 </ion-content>
