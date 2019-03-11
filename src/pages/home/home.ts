@@ -93,8 +93,7 @@ export class HomePage {
   }
 
   getDestination(ride: string) {
-    let res = ride.split('"');
-    return (res[3] + ' - ' + res[7]);
+    return (JSON.parse(ride).start + ' - ' + JSON.parse(ride).destination);
   }
 
   /*

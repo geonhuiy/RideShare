@@ -54,9 +54,8 @@ export class RidedetailsPage {
     });
   }
 
-  getDestination(ride:string) {
-    let res = ride.split('"');
-    this.destination = (res[3] + " - " + res[7]);
+  getDestination(ride: string) {
+    this.destination = (JSON.parse(ride).start + ' - ' + JSON.parse(ride).destination);
   }
 
   getTakenSeats(){
