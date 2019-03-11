@@ -26,6 +26,8 @@ export class RidedetailsPage {
   item: Pic;
   uploader: string;
   destination: string;
+  rideDescription: string;
+  time: string;
   test: any;
   commented: boolean;
   takenSeats: Observable<Comment[]>;
@@ -56,6 +58,8 @@ export class RidedetailsPage {
 
   getDestination(ride: string) {
     this.destination = (JSON.parse(ride).start + ' - ' + JSON.parse(ride).destination);
+    this.time = (JSON.parse(ride).timeAdded + ' - ' + JSON.parse(ride).timeReached);
+    this.rideDescription = JSON.parse(ride).rideDescription;
   }
 
   getTakenSeats(){

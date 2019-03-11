@@ -23,6 +23,14 @@
     <ion-input type="string" [(ngModel)]="rideDetail.destination" name="destination" required></ion-input>
   </ion-item>
   <ion-item>
+    <ion-label color="primary" stacked>Time leaving</ion-label>
+    <ion-input type="Time" [(ngModel)]="rideDetail.timeAdded" name="leaving"  minlength="3" [required] ></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label color="primary" stacked>Time arriving</ion-label>
+    <ion-input type="Time" [(ngModel)]="rideDetail.timeReached" name="arriving"  minlength="3" [required] ></ion-input>
+  </ion-item>
+  <ion-item>
     <ion-label color="primary" stacked>Additional details about the ride</ion-label>
     <ion-input type="string" [(ngModel)]="rideDetail.rideDescription" name="rideDetail"></ion-input>
   </ion-item>

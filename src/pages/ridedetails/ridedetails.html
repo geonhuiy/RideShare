@@ -13,6 +13,7 @@
 <ion-content padding>
   <ion-card *ngIf="item">
     <h2>{{ destination }}</h2>
+    <p>{{ time }}</p>
     <img *ngIf="item.media_type === 'image'" [src] = "url + item.filename">
     <video *ngIf="item.media_type === 'video' " width="320" height="240" controls>
       <source [src] = "url + item.filename">
@@ -20,6 +21,7 @@
     </video>
     <audio *ngIf="item.media_type === 'audio' " [src] = "url + item.filename" controls></audio>
     <p>{{ uploader }}</p>
+    <p>{{ rideDescription }}</p>
     <button *ngIf="!commented" ion-button (click)="getSeat()">take spot!</button>
     <ion-list>
       <ion-item *ngFor ="let comment of takenSeats | async">
