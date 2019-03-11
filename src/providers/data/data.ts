@@ -135,6 +135,15 @@ export class DataProvider {
     return this.http.post<any>(this.mediaURL + 'comments', comment, httpOptions);
   }
 
+  cancelSeat(commentId: any) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'x-access-token': localStorage.getItem('token'),
+      }),
+    };
+    return this.http.delete<any>(this.mediaURL + 'comments/' + commentId, httpOptions);
+  }
+
   getTakenSeats(id: any) {
     return this.http.get<any>(this.mediaURL + 'comments/file/' + id);
   }

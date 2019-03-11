@@ -75,7 +75,20 @@ export class RidedetailsPage {
     }
   }
 
+  cancelSeat(commentId:any){
+    if(this.commented){
+      console.log("comments were found");
+      this.dataProvider.cancelSeat(commentId).subscribe(res => {
+        console.log(res);
+        this.ionViewDidLoad();
+      });
+    }else{
+      this.presentAlert('You have nothing to cancel!');
+    }
+  }
+
   checkComments(){
+    this.commented = false;
     console.log("checking for comments");
     this.dataProvider.getTakenSeats(this.Id).subscribe(data => {
       console.log("subscribe");
@@ -92,6 +105,10 @@ export class RidedetailsPage {
         });
       };
     });
+  }
+
+  myComment(id:any){
+    return id == localStorage.getItem("userId");
   }
 
   presentAlert(message: string) {
