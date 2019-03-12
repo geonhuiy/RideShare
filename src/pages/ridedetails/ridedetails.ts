@@ -27,8 +27,17 @@ export class RidedetailsPage {
   uploader: string;
   destination: string;
   rideDescription: string;
+  stars: number;
+  noStars: number;
   time: string;
   test: any;
+  today = new Date();
+  rate = {
+    "file_id":"",
+    "rating":""
+  }
+  rating = 0;
+  rateCount = 0;
   commented: boolean;
   takenSeats: Observable<Comment[]>;
 
@@ -43,6 +52,10 @@ export class RidedetailsPage {
     this.getTakenSeats();
     this.comment.file_id = this.Id;
     this.checkComments();
+    this.stars = 4;
+    this.noStars = 5 - this.stars;
+    this.getRate();
+    this.checkCount();
   }
 
   getDetails(){
@@ -63,7 +76,7 @@ export class RidedetailsPage {
   }
 
   getTakenSeats(){
-    this.takenSeats = this.dataProvider.getTakenSeats(this.Id)
+    this.takenSeats = this.dataProvider.getTakenSeats(this.Id);
   }
 
   getSeat(){
@@ -112,6 +125,45 @@ export class RidedetailsPage {
 
   myComment(id:any){
     return id == localStorage.getItem("userId");
+  }
+
+  isExpiredRide(item: Pic) {
+    let date = new Date(this.today.getFullYear()+'-'+(this.today.getMonth()+1)+'-'+this.today.getDate());
+    let date1 = new Date(JSON.parse(item.description).timeDate);
+    return (date1 < date);
+  }
+
+  addRate(rate:string){
+    this.rate.file_id=this.Id;
+    this.rate.rating=rate;
+    this.dataProvider.addRating(this.rate).subscribe(res => {
+      console.log(res);
+    });
+  }
+
+  getRate(){
+    console.log(this.rating);
+    this.dataProvider.getRating().subscribe(res => {
+      console.log(res);
+      res.forEach(element => {
+        this.dataProvider.getSingleMedia(element.file_id).subscribe(data => {
+          console.log(data);
+          if(data.user_id == this.item.user_id){
+            this.rating = this.rating + element.rating;
+            this.rateCount++;
+            console.log("in data " + this.rating);
+          }
+        });
+      });
+    });
+  }
+
+  checkCount(){
+    console.log("in check");
+    if(this.rateCount>0){
+      this.rating = this.rating/this.rateCount;
+    }
+    console.log("this is the check" + this.rating);
   }
 
   presentAlert(message: string) {
