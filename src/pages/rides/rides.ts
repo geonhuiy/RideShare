@@ -26,7 +26,7 @@ export class RidesPage {
   };
   name = '';
   search = '';
-
+  today = new Date();
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private dataProvider: DataProvider) {
@@ -46,8 +46,12 @@ export class RidesPage {
 
   getSearchFiles(search: string, item: Pic) {
     let res = item.description;
-    let data = (JSON.parse(res).start + JSON.parse(res).destination).toLowerCase();
-    return data.includes(search.toLowerCase());
+    let date = new Date(this.today.getFullYear()+'-'+(this.today.getMonth()+1)+'-'+this.today.getDate());
+    let date1 = new Date(JSON.parse(res).timeDate);
+    if(date1 > date){
+      let data = (JSON.parse(res).start + JSON.parse(res).destination).toLowerCase();
+      return data.includes(search.toLowerCase());
+    }
   }
 
   checkSearch(search: string) {
@@ -56,6 +60,14 @@ export class RidesPage {
 
   getDestination(ride: string) {
     return (JSON.parse(ride).start + ' - ' + JSON.parse(ride).destination);
+  }
+
+  getDate(ride: string) {
+    return (JSON.parse(ride).timeDate);
+  }
+
+  getTime(ride: string) {
+    return (JSON.parse(ride).timeAdded + ' - ' + JSON.parse(ride).timeReached);
   }
 
   /*

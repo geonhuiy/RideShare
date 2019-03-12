@@ -30,6 +30,8 @@ export class HomePage {
   userData: User = { username: null };
   registerData: User = { username: null };
   hasAccount = true;
+  today = new Date();
+
   private passwordCheck: string;
   private usernameCheck = true;
   private passwordMatch = true;
@@ -74,7 +76,19 @@ export class HomePage {
   }
 
   isYourRide(item: Pic) {
-    return this.ownRides.includes(item.file_id);
+    let date = new Date(this.today.getFullYear()+'-'+(this.today.getMonth()+1)+'-'+this.today.getDate());
+    let date1 = new Date(JSON.parse(item.description).timeDate);
+    if(date1 > date){
+      return this.ownRides.includes(item.file_id);
+    }
+  }
+
+  isExpiredRide(item: Pic) {
+    let date = new Date(this.today.getFullYear()+'-'+(this.today.getMonth()+1)+'-'+this.today.getDate());
+    let date1 = new Date(JSON.parse(item.description).timeDate);
+    if(date1 < date){
+      return this.ownRides.includes(item.file_id);
+    }
   }
 
   getUser() {
@@ -94,6 +108,14 @@ export class HomePage {
 
   getDestination(ride: string) {
     return (JSON.parse(ride).start + ' - ' + JSON.parse(ride).destination);
+  }
+
+  getDate(ride: string) {
+    return (JSON.parse(ride).timeDate);
+  }
+
+  getTime(ride: string) {
+    return (JSON.parse(ride).timeAdded + ' - ' + JSON.parse(ride).timeReached);
   }
 
   /*
