@@ -21,7 +21,19 @@
     </video>
     <audio *ngIf="item.media_type === 'audio' " [src] = "url + item.filename" controls></audio>
     
-    <p>{{ uploader + " " +stars}}</p>
+    <p>{{ uploader }}</p>
+        <p>{{rating}}</p>
+      <ion-icon name="star"></ion-icon>
+    <div *ngIf="isExpiredRide(item)">
+      <div *ngIf="!rated">
+      <p >Rate your ride!</p>
+        <ion-icon (click)="addRate(1)" name="star-outline"></ion-icon>
+        <ion-icon (click)="addRate(2)" name="star-outline"></ion-icon>
+        <ion-icon (click)="addRate(3)" name="star-outline"></ion-icon>
+        <ion-icon (click)="addRate(4)" name="star-outline"></ion-icon>
+        <ion-icon (click)="addRate(5)" name="star-outline"></ion-icon>
+      </div>
+    </div>
     <p>{{ rideDescription }}</p>
     <button *ngIf="!commented" ion-button (click)="getSeat()">take spot!</button><br>
     <h2>Taken Seats</h2>
