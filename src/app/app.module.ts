@@ -24,7 +24,8 @@ import { RidedetailsPage } from '../pages/ridedetails/ridedetails';
 import { VehicleUploadPage } from '../pages/vehicle-upload/vehicle-upload';
 import { Camera } from '@ionic-native/camera';
 import { UsernamePipe } from '../pipes/username/username';
-import { GoogleMaps } from '@ionic-native/google-maps';
+import { Geocoder, GoogleMaps } from '@ionic-native/google-maps';
+import { NativeGeocoder } from '@ionic-native/native-geocoder';
 
 @NgModule({
   declarations: [
@@ -66,6 +67,7 @@ import { GoogleMaps } from '@ionic-native/google-maps';
     Chooser,
     Camera,
     GoogleMaps,
+    Geocoder,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     DataProvider,
   ]

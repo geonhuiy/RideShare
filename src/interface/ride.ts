@@ -6,3 +6,8 @@ export interface RideDetails {
   timeReached?: string;
   rideDescription?: string;
 }
+
+export interface LatLong {
+  lat?: string;
+  lng?: string;
+}

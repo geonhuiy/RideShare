@@ -14,11 +14,11 @@
 <ion-content padding>
   <ion-item>
     <ion-label color="primary" stacked>Going from</ion-label>
-    <ion-input type="string" [(ngModel)]="rideDetail.start" name="start" required (ionBlur)="geocodeStart($event);"  autocomplete="on" clearInput="true" placeholder="City, address or street name"></ion-input>
+    <ion-input type="string" [(ngModel)]="start" name="start" required (ionBlur)="geocodeStart($event);"  autocomplete="on" clearInput="true" placeholder="City, address or street name"></ion-input>
   </ion-item>
   <ion-item>
     <ion-label color="primary" stacked>Going to</ion-label>
-    <ion-input type="string" [(ngModel)]="rideDetail.destination" name="destination" required (ionBlur)="geocodeDestination($event);" autocomplete="on" clearInput="true" placeholder="City, address or street name"></ion-input>
+    <ion-input type="string" [(ngModel)]="destination" name="destination" required (ionBlur)="geocodeDestination($event);" autocomplete="on" clearInput="true" placeholder="City, address or street name"></ion-input>
   </ion-item>
   <ion-card id="map_canvas" style="height:60% !important;"></ion-card>
 <form (submit)="upload()">
@@ -32,7 +32,7 @@
   </ion-item>
   <ion-item>
     <ion-label color="primary" stacked>Time arriving</ion-label>
-    <ion-input type="Time" [(ngModel)]="rideDetail.timeReached" name="arriving"  minlength="3" [required] ></ion-input>
+    <ion-input type="Time" [(ngModel)]="rideDetail.timeReached" name="arriving"  minlength="3" [required] (ionBlur)="reverseStartGeocode();reverseDestinationGeocode()"></ion-input>
   </ion-item>
   <ion-item>
     <ion-label color="primary" stacked>Additional details about the ride</ion-label>
@@ -45,5 +45,7 @@
     <img [src]="filedata">
   </ion-card>
   <button ion-button type="submit">Submit ride</button>
+  <button ion-button type="button"></button>
 </form>
+  <!--p [(ngModel)]="startTest" name="start" *ngIf="startTest"></p-->
 </ion-content>

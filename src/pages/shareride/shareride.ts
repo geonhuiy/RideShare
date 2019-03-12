@@ -7,13 +7,13 @@ import {
 } from 'ionic-angular';
 import { DataProvider } from '../../providers/data/data';
 import { Camera, CameraOptions } from '@ionic-native/camera';
-import { RideDetails } from '../../interface/ride';
+import { LatLong, RideDetails } from '../../interface/ride';
 import {
   BaseArrayClass,
   Geocoder, GeocoderRequest, GeocoderResult,
   GoogleMap, GoogleMapOptions,
   GoogleMaps,
-  GoogleMapsEvent,
+  GoogleMapsEvent, ILatLng,
   LatLng, LocationService,
   Marker,
   MarkerOptions, MyLocation,
@@ -43,7 +43,8 @@ export class ShareridePage {
   isSearching = false;
   startMarker: Marker;
   destinationMarker: Marker;
-
+  start: string;
+  destination: string;
   rideDetail: RideDetails = {
     start: null,
     destination: null,
@@ -155,30 +156,6 @@ export class ShareridePage {
 
   // ************************* Maps *************************
 
-  /*initMap() {
-    let map: GoogleMap = this.googleMaps.create(this.element.nativeElement);
-    map.one(GoogleMapsEvent.MAP_READY).then(
-      (data: any) => {
-        let coordinates: LatLng = new LatLng(33.6396965, -84.4304574);
-        let position = {
-          target: coordinates,
-          zoom: 17,
-        };
-        map.animateCamera(position);
-
-        let markerOptions: MarkerOptions = {
-          position: coordinates,
-          title: 'Some point',
-          icon: 'pin',
-        };
-        const marker = map.addMarker(markerOptions).then(
-          ((marker: Marker) => {
-            marker.showInfoWindow();
-          }),
-        );
-      });
-  }*/
-
   initMap() {
     LocationService.getMyLocation().then(
       (currentLocation: MyLocation) => {
@@ -189,52 +166,13 @@ export class ShareridePage {
           },
         };
         this.map = GoogleMaps.create('map_canvas', options);
-        // Adding markers
-        /*let markerOptions: MarkerOptions = {
-          position: currentLocation.latLng,
-          title: 'Exposing my house',
-        };
-        const marker = this.map.addMarker(markerOptions).then(
-          ((marker: Marker) => {
-            marker.showInfoWindow();
-          })
-        );*/
       },
     );
   }
 
-  // Geocoding multiple locations
-  /*geocode(event) {
-    if (this.isSearching) {
-      return;
-    }
-    this.isSearching = true;
-    Geocoder.geocode({
-      'address':
-        [
-          this.rideDetail.start,
-          this.rideDetail.destination,
-        ],
-    }).then(
-      (mvcArray: BaseArrayClass<GeocoderResult[]>) => {
-        mvcArray.one('finish').then(() => {
-          if (mvcArray.getLength() > 0) {
-            let results: any[] = mvcArray.getArray();
-            results.forEach((result: GeocoderResult[]) => {
-              this.map.addMarkerSync({
-                'position': result[0].position,
-                'title': JSON.stringify(result),
-              });
-            });
-          }
-          this.isSearching = false;
-        });
-      });
-  }*/
-
   geocodeStart(event) {
     Geocoder.geocode({
-      'address': this.rideDetail.start,
+      'address': this.start,
     }).then(
       (results: GeocoderResult[]) => {
         if (!results.length) {
@@ -256,7 +194,7 @@ export class ShareridePage {
 
   geocodeDestination(event) {
     Geocoder.geocode({
-      'address': this.rideDetail.destination,
+      'address': this.destination,
     }).then(
       (results: GeocoderResult[]) => {
         if (!results.length) {
@@ -271,6 +209,37 @@ export class ShareridePage {
           'position': results[0].position,
           'title': JSON.stringify(results),
         });
+      },
+    );
+  }
+
+  reverseStartGeocode($event) {
+    Geocoder.geocode({
+      'position': JSON.parse(this.rideDetail.start),
+    }).then(
+      (results: GeocoderResult[]) => {
+        if (results.length === 0) {
+          return null;
+        }
+        let address: any = results[0].extra.lines;
+        this.rideDetail.start = address;
+      },
+    );
+  }
+
+  reverseDestinationGeocode($event) {
+    Geocoder.geocode({
+      'position': JSON.parse(this.rideDetail.destination),
+    }).then(
+      (results: GeocoderResult[]) => {
+        if (results.length === 0) {
+          return null;
+        }
+
+        let address: any = results[0].extra.lines;
+        this.rideDetail.destination = address;
+        console.log(JSON.stringify(results));
+        console.log(address);
       },
     );
   }
