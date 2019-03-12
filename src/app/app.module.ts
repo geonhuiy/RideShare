@@ -25,6 +25,7 @@ import { VehicleUploadPage } from '../pages/vehicle-upload/vehicle-upload';
 import { Camera } from '@ionic-native/camera';
 import { UsernamePipe } from '../pipes/username/username';
 import { GoogleMaps } from '@ionic-native/google-maps';
+import { MapSearchPage } from '../pages/map-search/map-search';
 
 
 @NgModule({
@@ -39,7 +40,7 @@ import { GoogleMaps } from '@ionic-native/google-maps';
     ThumbnailPipe,
     UsernamePipe,
     RidedetailsPage,
-    VehicleUploadPage
+    VehicleUploadPage,
   ],
   imports: [
     BrowserModule,
@@ -56,7 +57,7 @@ import { GoogleMaps } from '@ionic-native/google-maps';
     ShareridePage,
     EditProfilePage,
     RidedetailsPage,
-    VehicleUploadPage
+    VehicleUploadPage,
   ],
   providers: [
     StatusBar,

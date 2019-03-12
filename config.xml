@@ -3,7 +3,7 @@
     <name>MyApp</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
-    <content src="index.html" />
+    <content original-src="index.html" src="http://192.168.0.7:8100" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -85,8 +85,6 @@
     <plugin name="cordova-plugin-chooser" spec="1.2.5" />
     <allow-navigation href="http://192.168.0.7:8100" />
     <plugin name="cordova-plugin-camera" spec="4.0.3" />
-    <engine name="android" spec="7.1.4" />
-    <engine name="browser" spec="~5.0.4" />
     <plugin name="cordova-plugin-android-permissions" spec="1.0.0" />
     <plugin name="cordova-plugin-googlemaps" spec="2.5.2">
         <variable name="API_KEY_FOR_ANDROID" value="AIzaSyDHY3SLJrzEYN-nWVsI5ix4dU1hrL5TJ3o" />
@@ -94,4 +92,6 @@
         <variable name="PLAY_SERVICES_VERSION" value="15.0.1" />
         <variable name="ANDROID_SUPPORT_V4_VERSION" value="27.+" />
     </plugin>
+    <engine name="android" spec="7.1.4" />
+    <engine name="browser" spec="5.0.4" />
 </widget>

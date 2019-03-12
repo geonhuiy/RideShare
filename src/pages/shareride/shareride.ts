@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import {
-  ActionSheetController,
+  ActionSheetController, ModalController,
   NavController,
   NavParams,
   Platform,
@@ -9,6 +9,8 @@ import { DataProvider } from '../../providers/data/data';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { RideDetails } from '../../interface/ride';
 import {
+  BaseArrayClass,
+  Geocoder, GeocoderRequest, GeocoderResult,
   GoogleMap, GoogleMapOptions,
   GoogleMaps,
   GoogleMapsEvent,
@@ -30,13 +32,15 @@ export class ShareridePage {
     private camera: Camera,
     private  actionSheetCtrl: ActionSheetController,
     private  googleMaps: GoogleMaps,
-    private platform: Platform) {
+    private platform: Platform,
+    private modalCtrl: ModalController) {
   }
 
   filedata = '';
   rideBlob: Blob;
   @ViewChild('map_canvas') element;
   map: GoogleMap;
+  isSearching = false;
 
   rideDetail: RideDetails = {
     start: null,
@@ -179,7 +183,7 @@ export class ShareridePage {
         let options: GoogleMapOptions = {
           camera: {
             target: currentLocation.latLng,
-            zoom: 10,
+            zoom: 9,
           },
         };
         this.map = GoogleMaps.create('map_canvas', options);
@@ -197,5 +201,72 @@ export class ShareridePage {
     );
   }
 
-  // ************************* Maps *************************
+  // Geocoding multiple locations
+  /*geocode(event) {
+    if (this.isSearching) {
+      return;
+    }
+    this.isSearching = true;
+    Geocoder.geocode({
+      'address':
+        [
+          this.rideDetail.start,
+          this.rideDetail.destination,
+        ],
+    }).then(
+      (mvcArray: BaseArrayClass<GeocoderResult[]>) => {
+        mvcArray.one('finish').then(() => {
+          if (mvcArray.getLength() > 0) {
+            let results: any[] = mvcArray.getArray();
+            results.forEach((result: GeocoderResult[]) => {
+              this.map.addMarkerSync({
+                'position': result[0].position,
+                'title': JSON.stringify(result),
+              });
+            });
+          }
+          this.isSearching = false;
+        });
+      });
+  }*/
+
+  geocodeStart(event) {
+    Geocoder.geocode({
+      'address': this.rideDetail.start,
+    }).then(
+      (results: GeocoderResult[]) => {
+        if (!results.length) {
+          this.isSearching = false;
+          return null;
+        }
+
+        let marker: Marker = this.map.addMarkerSync({
+          'position': results[0].position,
+          'title': JSON.stringify(results),
+        });
+      },
+    );
+  }
+
+  geocodeDestination(event) {
+    Geocoder.geocode({
+      'address': this.rideDetail.destination,
+    }).then(
+      (results: GeocoderResult[]) => {
+        if (!results.length) {
+          this.isSearching = false;
+          return null;
+        }
+
+        let marker: Marker = this.map.addMarkerSync({
+          'position': results[0].position,
+          'title': JSON.stringify(results),
+        });
+      },
+    );
+  }
+
 }
+
+// ************************* Maps *************************
+
