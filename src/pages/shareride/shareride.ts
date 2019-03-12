@@ -41,6 +41,8 @@ export class ShareridePage {
   @ViewChild('map_canvas') element;
   map: GoogleMap;
   isSearching = false;
+  startMarker: Marker;
+  destinationMarker: Marker;
 
   rideDetail: RideDetails = {
     start: null,
@@ -239,8 +241,12 @@ export class ShareridePage {
           this.isSearching = false;
           return null;
         }
+        this.rideDetail.start = JSON.stringify(results[0].position);
+        if (this.startMarker) {
+          this.startMarker.remove();
+        }
 
-        let marker: Marker = this.map.addMarkerSync({
+        this.startMarker = this.map.addMarkerSync({
           'position': results[0].position,
           'title': JSON.stringify(results),
         });
@@ -257,15 +263,17 @@ export class ShareridePage {
           this.isSearching = false;
           return null;
         }
-
-        let marker: Marker = this.map.addMarkerSync({
+        this.rideDetail.destination = JSON.stringify(results[0].position);
+        if (this.destinationMarker) {
+          this.destinationMarker.remove();
+        }
+        this.destinationMarker = this.map.addMarkerSync({
           'position': results[0].position,
           'title': JSON.stringify(results),
         });
       },
     );
   }
-
 }
 
 // ************************* Maps *************************

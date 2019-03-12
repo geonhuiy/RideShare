@@ -14,13 +14,13 @@
 <ion-content padding>
   <ion-item>
     <ion-label color="primary" stacked>Going from</ion-label>
-    <ion-input type="string" [(ngModel)]="rideDetail.start" name="start" required (ionChange)="geocodeStart($event)"></ion-input>
+    <ion-input type="string" [(ngModel)]="rideDetail.start" name="start" required (ionBlur)="geocodeStart($event);"  autocomplete="on" clearInput="true" placeholder="City, address or street name"></ion-input>
   </ion-item>
   <ion-item>
     <ion-label color="primary" stacked>Going to</ion-label>
-    <ion-input type="string" [(ngModel)]="rideDetail.destination" name="destination" required (ionChange)="geocodeDestination($event)"></ion-input>
+    <ion-input type="string" [(ngModel)]="rideDetail.destination" name="destination" required (ionBlur)="geocodeDestination($event);" autocomplete="on" clearInput="true" placeholder="City, address or street name"></ion-input>
   </ion-item>
-  <ion-card id="map_canvas" style="height:60%"></ion-card>
+  <ion-card id="map_canvas" style="height:60% !important;"></ion-card>
 <form (submit)="upload()">
   <ion-item>
     <ion-label color="primary" stacked>Date of the ride</ion-label>

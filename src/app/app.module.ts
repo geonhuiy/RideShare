@@ -25,8 +25,6 @@ import { VehicleUploadPage } from '../pages/vehicle-upload/vehicle-upload';
 import { Camera } from '@ionic-native/camera';
 import { UsernamePipe } from '../pipes/username/username';
 import { GoogleMaps } from '@ionic-native/google-maps';
-import { MapSearchPage } from '../pages/map-search/map-search';
-
 
 @NgModule({
   declarations: [
@@ -44,8 +42,11 @@ import { MapSearchPage } from '../pages/map-search/map-search';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp),
-    HttpClientModule
+    HttpClientModule,
+    IonicModule.forRoot(MyApp, {
+      scrollAssist: false,
+      autoFocusAssist: false
+    }),
   ],
   bootstrap: [IonicApp],
   entryComponents: [
