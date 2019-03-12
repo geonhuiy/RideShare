@@ -20,7 +20,8 @@
       Your device does not support the video.
     </video>
     <audio *ngIf="item.media_type === 'audio' " [src] = "url + item.filename" controls></audio>
-    <p>{{ uploader }}</p>
+    
+    <p>{{ uploader + " " +stars}}</p>
     <p>{{ rideDescription }}</p>
     <button *ngIf="!commented" ion-button (click)="getSeat()">take spot!</button><br>
     <h2>Taken Seats</h2>
