@@ -38,6 +38,7 @@ export class RidedetailsPage {
   }
   rating = 0;
   rateCount = 0;
+  rated = false;
   commented: boolean;
   takenSeats: Observable<Comment[]>;
 
@@ -55,7 +56,6 @@ export class RidedetailsPage {
     this.stars = 4;
     this.noStars = 5 - this.stars;
     this.getRate();
-    this.checkCount();
   }
 
   getDetails(){
@@ -134,36 +134,36 @@ export class RidedetailsPage {
   }
 
   addRate(rate:string){
+    console.log("rating now: " + rate);
     this.rate.file_id=this.Id;
     this.rate.rating=rate;
     this.dataProvider.addRating(this.rate).subscribe(res => {
       console.log(res);
     });
+    this.ionViewDidLoad();
   }
 
   getRate(){
-    console.log(this.rating);
     this.dataProvider.getRating().subscribe(res => {
-      console.log(res);
+      //console.log(res);
       res.forEach(element => {
+        if(element.user_id == localStorage.getItem("userId") && element.file_id == this.Id){
+          this.rated = true;
+        }
         this.dataProvider.getSingleMedia(element.file_id).subscribe(data => {
-          console.log(data);
+          //console.log(data);
           if(data.user_id == this.item.user_id){
-            this.rating = this.rating + element.rating;
+            let i = 0;
+            if(this.rateCount > 0 && this.rating > 0){
+            i = this.rating*this.rateCount;
+          }
             this.rateCount++;
-            console.log("in data " + this.rating);
+            this.rating = (i + element.rating)/this.rateCount;
+            //console.log("in data " + this.rating);
           }
         });
       });
     });
-  }
-
-  checkCount(){
-    console.log("in check");
-    if(this.rateCount>0){
-      this.rating = this.rating/this.rateCount;
-    }
-    console.log("this is the check" + this.rating);
   }
 
   presentAlert(message: string) {

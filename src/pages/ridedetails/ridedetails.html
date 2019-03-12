@@ -22,31 +22,18 @@
     <audio *ngIf="item.media_type === 'audio' " [src] = "url + item.filename" controls></audio>
     
     <p>{{ uploader }}</p>
-      <div *ngIf="!isExpiredRide(item)">
-      <ion-icon *ngIf="stars > 0.5" name="star"></ion-icon>
-      <ion-icon *ngIf="stars > 1.5" name="star"></ion-icon>
-      <ion-icon *ngIf="stars > 2.5" name="star"></ion-icon>
-      <ion-icon *ngIf="stars > 3.5" name="star"></ion-icon>
-      <ion-icon *ngIf="stars > 4.5" name="star"></ion-icon>
-      <ion-icon *ngIf="0.5 > stars" name="star-outline"></ion-icon>
-      <ion-icon *ngIf="1.5 > stars" name="star-outline"></ion-icon>
-      <ion-icon *ngIf="2.5 > stars" name="star-outline"></ion-icon>
-      <ion-icon *ngIf="3.5 > stars" name="star-outline"></ion-icon>
-      <ion-icon *ngIf="4.5 > stars" name="star-outline"></ion-icon>
-    </div>
+        <p>{{rating}}</p>
+      <ion-icon name="star"></ion-icon>
     <div *ngIf="isExpiredRide(item)">
-      <p>Rate your ride!</p>
-        <ion-icon (click)="addRate(1)"*ngIf="stars > 0.5" name="star"></ion-icon>
-        <ion-icon (click)="addRate(2)"*ngIf="stars > 1.5" name="star"></ion-icon>
-        <ion-icon (click)="addRate(3)"*ngIf="stars > 2.5" name="star"></ion-icon>
-        <ion-icon (click)="addRate(4)"*ngIf="stars > 3.5" name="star"></ion-icon>
-        <ion-icon (click)="addRate(5)"*ngIf="stars > 4.5" name="star"></ion-icon>
-        <ion-icon (click)="addRate(4)"*ngIf="0.5 > stars" name="star-outline"></ion-icon>
-        <ion-icon (click)="addRate(3)"*ngIf="1.5 > stars" name="star-outline"></ion-icon>
-        <ion-icon (click)="addRate(2)"*ngIf="2.5 > stars" name="star-outline"></ion-icon>
-        <ion-icon (click)="addRate(1)"*ngIf="3.5 > stars" name="star-outline"></ion-icon>
-        <ion-icon (click)="addRate(0)"*ngIf="4.5 > stars" name="star-outline"></ion-icon>
+      <div *ngIf="!rated">
+      <p >Rate your ride!</p>
+        <ion-icon (click)="addRate(1)" name="star-outline"></ion-icon>
+        <ion-icon (click)="addRate(2)" name="star-outline"></ion-icon>
+        <ion-icon (click)="addRate(3)" name="star-outline"></ion-icon>
+        <ion-icon (click)="addRate(4)" name="star-outline"></ion-icon>
+        <ion-icon (click)="addRate(5)" name="star-outline"></ion-icon>
       </div>
+    </div>
     <p>{{ rideDescription }}</p>
     <button *ngIf="!commented" ion-button (click)="getSeat()">take spot!</button><br>
     <h2>Taken Seats</h2>
