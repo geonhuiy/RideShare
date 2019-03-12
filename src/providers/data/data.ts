@@ -6,7 +6,14 @@ import {
   User,
   UsernameStatus,
 } from '../../interface/user';
-import { Pic, SearchParam, TagParam, UploadResponse, CommentResponse } from '../../interface/media';
+import {
+  Pic,
+  SearchParam,
+  TagParam,
+  UploadResponse,
+  CommentResponse,
+} from '../../interface/media';
+import { VehicleUploadPage } from '../../pages/vehicle-upload/vehicle-upload';
 
 /*
   Generated class for the DataProvider provider.
@@ -21,9 +28,11 @@ export class DataProvider {
   onSlides = false;
   token = {
     headers: new HttpHeaders({
-      'x-access-token': localStorage.getItem('token')
-    })
+      'x-access-token': localStorage.getItem('token'),
+    }),
   };
+
+  vehiclePic: string;
 
   constructor(public http: HttpClient) {
     // Do something
@@ -83,7 +92,8 @@ export class DataProvider {
   }
 
   uploadMedia(data: any) {
-    return this.http.post<UploadResponse>(this.mediaURL + 'media', data, this.token);
+    return this.http.post<UploadResponse>(this.mediaURL + 'media', data,
+      this.token);
   }
 
   getRides(searchParam: SearchParam) {
@@ -92,7 +102,8 @@ export class DataProvider {
         'x-access-token': localStorage.getItem('token'),
       }),
     };
-    return this.http.post<Pic[]>(this.mediaURL + 'media/search', searchParam, httpOptions);
+    return this.http.post<Pic[]>(this.mediaURL + 'media/search', searchParam,
+      httpOptions);
   }
 
   getAllRides(title: any) {
@@ -102,7 +113,8 @@ export class DataProvider {
         'x-access-token': localStorage.getItem('token'),
       }),
     };
-    return this.http.post<Pic[]>(this.mediaURL + 'media/search', title, httpOptions);
+    return this.http.post<Pic[]>(this.mediaURL + 'media/search', title,
+      httpOptions);
   }
 
   addTag(tag: TagParam) {
@@ -132,7 +144,8 @@ export class DataProvider {
         'x-access-token': localStorage.getItem('token'),
       }),
     };
-    return this.http.post<any>(this.mediaURL + 'comments', comment, httpOptions);
+    return this.http.post<any>(this.mediaURL + 'comments', comment,
+      httpOptions);
   }
 
   cancelSeat(commentId: any) {
@@ -141,7 +154,8 @@ export class DataProvider {
         'x-access-token': localStorage.getItem('token'),
       }),
     };
-    return this.http.delete<any>(this.mediaURL + 'comments/' + commentId, httpOptions);
+    return this.http.delete<any>(this.mediaURL + 'comments/' + commentId,
+      httpOptions);
   }
 
   getTakenSeats(id: any) {
@@ -155,5 +169,10 @@ export class DataProvider {
       }),
     };
     return this.http.get<any>(this.mediaURL + 'comments', httpOptions);
+  }
+
+  getBlob(vehiclePic: string) {
+    this.vehiclePic = vehiclePic;
+    return this.vehiclePic;
   }
 }

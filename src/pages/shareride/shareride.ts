@@ -18,6 +18,8 @@ import {
   Marker,
   MarkerOptions, MyLocation,
 } from '@ionic-native/google-maps';
+import { VehicleUploadPage } from '../vehicle-upload/vehicle-upload';
+import { RidesPage } from '../rides/rides';
 
 @Component({
   selector: 'page-shareride',
@@ -95,6 +97,7 @@ export class ShareridePage {
     this.dataProvider.uploadMedia(formData).subscribe(
       response => {
         console.log(response);
+        this.navCtrl.pop();
       },
       err => {
         console.log(JSON.stringify(err));
@@ -113,7 +116,6 @@ export class ShareridePage {
       imageData => {
         this.filedata = 'data:image/jpeg;base64,' + imageData;
         this.rideBlob = this.base64ToBlob(this.filedata);
-
       },
       err => {
         console.log(err);
@@ -238,8 +240,6 @@ export class ShareridePage {
 
         let address: any = results[0].extra.lines;
         this.rideDetail.destination = address;
-        console.log(JSON.stringify(results));
-        console.log(address);
       },
     );
   }

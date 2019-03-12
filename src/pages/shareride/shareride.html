@@ -6,7 +6,7 @@
 -->
 <ion-header>
   <ion-navbar color="primary">
-    <ion-title>shareride</ion-title>
+    <ion-title>Share ride</ion-title>
     <ion-spinner *ngIf="loading"></ion-spinner>
   </ion-navbar>
 </ion-header>
@@ -44,8 +44,6 @@
   <ion-card *ngIf="filedata" class="rideUpload-after" no-lines (click)="present()">
     <img [src]="filedata">
   </ion-card>
-  <button ion-button type="submit">Submit ride</button>
-  <button ion-button type="button"></button>
+  <button ion-button type="submit" block>Submit ride</button>
 </form>
-  <!--p [(ngModel)]="startTest" name="start" *ngIf="startTest"></p-->
 </ion-content>

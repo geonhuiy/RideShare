@@ -5,13 +5,13 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-  <ion-navbar>
-    <ion-title>VehicleUpload</ion-title>
+  <ion-navbar color="primary">
+    <ion-title>Uploading vehicle information</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <form (submit)="upload()">
+  <form (submit)="upload(); navCtrl.pop()">
     <ion-item>
       <ion-label color="primary" stacked>Number of seats</ion-label>
       <ion-input type="number" [(ngModel)]="vehicle.seatNo" name="seatNo" required></ion-input>

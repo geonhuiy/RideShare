@@ -6,9 +6,9 @@
 -->
 <ion-header>
   <ion-navbar color="primary">
-      <ion-title>
-          Profile
-        </ion-title>
+    <ion-title>
+      Profile
+    </ion-title>
     <ion-buttons end>
       <button ion-button (click)="present()">
         <ion-icon name="settings"></ion-icon>
@@ -20,28 +20,32 @@
 
 <ion-content padding>
 
-  <ion-item *ngIf="(profile | async) as prof " no-lines>
+    <ion-card *ngIf="(profile | async) as prof " no-lines>
 
-    <div *ngIf="profilePic" class="profPic_container">
-        <img [src]="dataProvider.mediaURL + 'uploads/' + profilePic" class="profPic" style="max-height: 100%; max-width: 100%">
-    </div>
+      <div *ngIf="profilePic" class="profPic_container">
+        <img [src]="dataProvider.mediaURL + 'uploads/' + profilePic" class="profPic"
+             style="max-height: 100%; max-width: 100%">
+      </div>
 
-    <div class="profPic_empty" (click)="presentUpload()" *ngIf="!profilePic">
-      <p text-wrap>Click to add a profile image</p>
-    </div>
+      <div class="profPic_empty" (click)="presentUpload(); uploadingProfile=true" *ngIf="!profilePic">
+        <p text-wrap>Click to add a profile image</p>
+      </div>
 
-    <h2 id="username">{{ prof.username }}</h2>
-    <p id="fullname"> {{ prof.full_name }}</p>
-    <p id="email"> {{ prof.email }}</p>
+      <h2 id="username">{{ prof.username }}</h2>
+      <p id="fullname"> {{ prof.full_name }}</p>
+      <p id="email"> {{ prof.email }}</p>
+    </ion-card>
 
-  </ion-item>
 
-  <ion-item no-lines *ngIf="userVehiclePic">
-    <ion-thumbnail>
+  <ion-card no-lines>
+    <div *ngIf="userVehiclePic">
       <img [src]="dataProvider.mediaURL + 'uploads/' + userVehiclePic">
-    </ion-thumbnail>
+    </div>
+    <div class="vehicle" (click)="openVehicleUpload();" *ngIf="!userVehiclePic" align-items-center>
+      <p>Click to add your vehicle information</p>
+    </div>
     <p *ngIf="userVehicle">Vehicle plate number: {{ userVehicle.plateNo }}</p>
     <p *ngIf="userVehicle">Number of seats: {{ userVehicle.seatNo }}</p>
-  </ion-item>
+  </ion-card>
 
 </ion-content>

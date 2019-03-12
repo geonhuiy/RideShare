@@ -47,6 +47,8 @@ export class ProfilePage {
   profileTag: TagParam = { tag: '', file_id: null };
   filedata = '';
   profileBlob: Blob;
+  uploadingProfile = false;
+  uploadingVehicle = false;
 
   ionViewDidEnter() {
     this.createLoading();
@@ -70,14 +72,6 @@ export class ProfilePage {
           icon: 'create',
           handler: () => {
             this.openEditProfile();
-          },
-        },
-        {
-          text: 'Upload vehicle information',
-          icon: 'car',
-          role: 'Upload vehicle information',
-          handler: () => {
-            this.openVehicleUpload();
           },
         },
         {
@@ -155,6 +149,7 @@ export class ProfilePage {
         )[0];
       },
     );
+    console.log(this.userVehiclePic);
   }
 
   getUserVehicle() {
@@ -255,15 +250,20 @@ export class ProfilePage {
 
   upload() {
     const formData = new FormData();
-    formData.append('title', 'profilePic');
+    formData.append('title', 'profile');
     formData.append('description', '');
     formData.append('file', this.profileBlob);
     this.dataProvider.uploadMedia(formData).subscribe(
       response => {
         console.log(JSON.stringify(response));
-        console.log('profile image uploaded');
         this.profileTag.file_id = response.file_id;
-        this.profileTag.tag = 'profile';
+        if (this.uploadingVehicle) {
+          this.profileTag.tag = 'userVehicle';
+          this.uploadingVehicle = false;
+        } else if (this.uploadingProfile) {
+          this.profileTag.tag = 'profile';
+          this.uploadingProfile = false;
+        }
         this.addTag(this.profileTag);
       },
       err => {

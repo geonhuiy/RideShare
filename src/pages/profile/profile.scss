@@ -11,7 +11,8 @@ page-profile {
     border-radius: 50%;
     height: $circle-height;
     width: $circle-height;
-    border: yellow 2px solid;
+    border: #006600 2px solid;
+    margin: 30px auto;
   }
 
 
@@ -19,13 +20,13 @@ page-profile {
     @extend .profPic;
     background-color: darkgrey;
     line-height: $circle-height;
-    margin: 0 auto;
     text-align: center;
 
     p {
       line-height: 1.5;
       display: inline-block;
       vertical-align: middle;
+      color: #006600;
     }
   }
 
@@ -36,7 +37,7 @@ page-profile {
 
   #username {
     @extend .userDetail;
-    margin-top: 20px;
+    margin-top: 15px;
     font-size: 20px;
   }
 
@@ -46,6 +47,20 @@ page-profile {
 
   #email {
     @extend .userDetail;
+  }
+
+  .vehicle {
+    text-align: center;
+    height: $circle-height;
+    width: 100%;
+    line-height: $circle-height;
+    p {
+      font-size: 17px;
+      line-height: 1.5;
+      vertical-align: middle;
+      display: inline-block;
+      color: #006600;
+    }
   }
 
 }
