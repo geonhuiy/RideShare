@@ -46,16 +46,15 @@
   <form *ngIf="!loggedIn()">
     <ion-slides scrollbar = "true">
       <ion-slide>
+        <br>
         <h1>Hi!</h1>
-        <h2>Welcome to RideShare!</h2>
-        <p>asdfasdfasdf</p><br>
-        <p>asdfasdfasdf</p><br>
-        <p>asdfasdfasdf</p><br>
-        <p>asdfasdfasdf</p><br>
-        <p>asdfasdfasdf</p>
-        <p>asdfasdfasdf</p><br><br><br>
+        <h2>Welcome to RideShare</h2><br>
+        <p>With RideShare you can easily get from place to another!</p>
+        <p>RideShare gives you possibility to share your everyday rides to Work, School, Training or just from place to another in general.</p><br><br>
+        <p style="font-weight: bold;" >Swipe left to start your trip!</p><br>
       </ion-slide>
       <ion-slide>
+          <img src="assets/imgs/rideshare.png" alt="logo" width="60" height="60">
         <h1>Log in or Create user!</h1>
 
         <form *ngIf="hasAccount" (ngSubmit)="login();" #loginForm="ngForm">
