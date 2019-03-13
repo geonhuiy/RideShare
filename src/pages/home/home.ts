@@ -3,7 +3,12 @@ import { Pic } from '../../interface/media';
 import { ShareridePage } from '../shareride/shareride';
 import { RidedetailsPage } from '../ridedetails/ridedetails';
 import { Component, ViewChild } from '@angular/core';
-import { AlertController, NavController, NavParams, Refresher } from 'ionic-angular';
+import {
+  AlertController,
+  NavController,
+  NavParams,
+  Refresher,
+} from 'ionic-angular';
 import { DataProvider } from '../../providers/data/data';
 import {
   LoginResponse,
@@ -14,7 +19,7 @@ import {
 
 @Component({
   selector: 'page-home',
-  templateUrl: 'home.html'
+  templateUrl: 'home.html',
 })
 export class HomePage {
   rideArray: Observable<Pic[]>;
@@ -23,7 +28,7 @@ export class HomePage {
   comments: any[];
   rides: Pic[];
   title = {
-    'title': 'getRide'
+    'title': 'getRide',
   };
   name = '';
   welcome = '';
@@ -63,9 +68,9 @@ export class HomePage {
       this.rideArray = this.dataProvider.getAllRides(this.title);
       this.dataProvider.getComments().subscribe(res => {
         while (res[i]) {
-          if(!this.ownRides.includes(res[i].file_id)){
-          this.ownRides[i] = res[i].file_id;
-        }
+          if (!this.ownRides.includes(res[i].file_id)) {
+            this.ownRides[i] = res[i].file_id;
+          }
           console.log(this.ownRides);
           i++;
         }
@@ -76,17 +81,21 @@ export class HomePage {
   }
 
   isYourRide(item: Pic) {
-    let date = new Date(this.today.getFullYear()+'-'+(this.today.getMonth()+1)+'-'+this.today.getDate());
+    let date = new Date(
+      this.today.getFullYear() + '-' + (this.today.getMonth() + 1) + '-' +
+      this.today.getDate());
     let date1 = new Date(JSON.parse(item.description).timeDate);
-    if(date1 > date){
+    if (date1 > date) {
       return this.ownRides.includes(item.file_id);
     }
   }
 
   isExpiredRide(item: Pic) {
-    let date = new Date(this.today.getFullYear()+'-'+(this.today.getMonth()+1)+'-'+this.today.getDate());
+    let date = new Date(
+      this.today.getFullYear() + '-' + (this.today.getMonth() + 1) + '-' +
+      this.today.getDate());
     let date1 = new Date(JSON.parse(item.description).timeDate);
-    if(date1 < date){
+    if (date1 < date) {
       return this.ownRides.includes(item.file_id);
     }
   }
@@ -103,7 +112,8 @@ export class HomePage {
   }
 
   loggedIn() {
-    return (localStorage.getItem('token') != null && localStorage.getItem('userId') != null);
+    return (localStorage.getItem('token') != null &&
+      localStorage.getItem('userId') != null);
   }
 
   getDestination(ride: string) {
@@ -117,16 +127,6 @@ export class HomePage {
   getTime(ride: string) {
     return (JSON.parse(ride).timeAdded + ' - ' + JSON.parse(ride).timeReached);
   }
-
-  /*
-  getUser(Id: string) {
-    this.dataProvider.getUser(Id).subscribe(res => {
-      this.name = res.username;
-      console.log(res.username);
-    });
-    return this.name;
-  }
-  */
 
   viewRide(id: string) {
     this.navCtrl.push(RidedetailsPage, {

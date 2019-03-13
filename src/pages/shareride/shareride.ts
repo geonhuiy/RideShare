@@ -96,11 +96,9 @@ export class ShareridePage {
     formData.append('file', this.rideBlob);
     this.dataProvider.uploadMedia(formData).subscribe(
       response => {
-        console.log(response);
         this.navCtrl.pop();
       },
       err => {
-        console.log(JSON.stringify(err));
       },
     );
   }
@@ -118,7 +116,6 @@ export class ShareridePage {
         this.rideBlob = this.base64ToBlob(this.filedata);
       },
       err => {
-        console.log(err);
       },
     );
   }
@@ -138,11 +135,11 @@ export class ShareridePage {
         this.rideBlob = this.base64ToBlob(this.filedata);
       },
       err => {
-        console.log(err);
       },
     );
   }
 
+  // Creates a blob from the base64 DATAURL from gallery/camera
   base64ToBlob(dataURL: string) {
     const byteString = atob(dataURL.split(',')[1]);
     const ab = new ArrayBuffer(byteString.length);
@@ -158,6 +155,7 @@ export class ShareridePage {
 
   // ************************* Maps *************************
 
+  // Initializes map with current position
   initMap() {
     LocationService.getMyLocation().then(
       (currentLocation: MyLocation) => {
@@ -172,6 +170,7 @@ export class ShareridePage {
     );
   }
 
+  // Converts a readable address into a LatLng
   geocodeStart(event) {
     Geocoder.geocode({
       'address': this.start,
@@ -182,10 +181,11 @@ export class ShareridePage {
           return null;
         }
         this.rideDetail.start = JSON.stringify(results[0].position);
+        // If starting position is modified, removes the current starting marker
         if (this.startMarker) {
           this.startMarker.remove();
         }
-
+        // Adds a starting marker on the map
         this.startMarker = this.map.addMarkerSync({
           'position': results[0].position,
           'title': JSON.stringify(results),
@@ -194,6 +194,7 @@ export class ShareridePage {
     );
   }
 
+  // Converts the destination address into a LatLng
   geocodeDestination(event) {
     Geocoder.geocode({
       'address': this.destination,
@@ -204,9 +205,11 @@ export class ShareridePage {
           return null;
         }
         this.rideDetail.destination = JSON.stringify(results[0].position);
+        // If destination position is modified, removes current destination marker
         if (this.destinationMarker) {
           this.destinationMarker.remove();
         }
+        // Adds a destination marker on the map
         this.destinationMarker = this.map.addMarkerSync({
           'position': results[0].position,
           'title': JSON.stringify(results),
@@ -215,6 +218,7 @@ export class ShareridePage {
     );
   }
 
+  // Converts a LatLng into a readable address
   reverseStartGeocode($event) {
     Geocoder.geocode({
       'position': JSON.parse(this.rideDetail.start),
@@ -228,7 +232,7 @@ export class ShareridePage {
       },
     );
   }
-
+  // Converts a LatLng into a readable address
   reverseDestinationGeocode($event) {
     Geocoder.geocode({
       'position': JSON.parse(this.rideDetail.destination),

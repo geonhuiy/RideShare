@@ -15,12 +15,6 @@ import {
 } from '../../interface/media';
 import { VehicleUploadPage } from '../../pages/vehicle-upload/vehicle-upload';
 
-/*
-  Generated class for the DataProvider provider.
-
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
 @Injectable()
 export class DataProvider {
   mediaURL = 'http://media.mw.metropolia.fi/wbma/';
@@ -31,8 +25,6 @@ export class DataProvider {
       'x-access-token': localStorage.getItem('token'),
     }),
   };
-
-  vehiclePic: string;
 
   constructor(public http: HttpClient) {
     // Do something
@@ -169,10 +161,5 @@ export class DataProvider {
       }),
     };
     return this.http.get<any>(this.mediaURL + 'comments', httpOptions);
-  }
-
-  getBlob(vehiclePic: string) {
-    this.vehiclePic = vehiclePic;
-    return this.vehiclePic;
   }
 }

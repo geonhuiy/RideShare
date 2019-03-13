@@ -1,5 +1,11 @@
 import { Component } from '@angular/core';
-import { ActionSheetController, LoadingController, NavController, NavParams, Platform } from 'ionic-angular';
+import {
+  ActionSheetController,
+  LoadingController,
+  NavController,
+  NavParams,
+  Platform,
+} from 'ionic-angular';
 import { DataProvider } from '../../providers/data/data';
 import { Vehicle } from '../../interface/vehicle';
 import { Camera, CameraOptions } from '@ionic-native/camera';
@@ -19,16 +25,17 @@ import { TagParam } from '../../interface/media';
 export class VehicleUploadPage {
   loading: any;
 
-  constructor(public navCtrl: NavController,
-              public navParams: NavParams,
-              private loadingCtrl: LoadingController,
-              private platform: Platform,
-              private dataProvider: DataProvider,
-              private actionSheetCtrl: ActionSheetController,
-              private camera: Camera) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private loadingCtrl: LoadingController,
+    private platform: Platform,
+    private dataProvider: DataProvider,
+    private actionSheetCtrl: ActionSheetController,
+    private camera: Camera) {
     this.loading = loadingCtrl.create({
       content: 'Uploading',
-      spinner: 'ios'
+      spinner: 'ios',
     });
   }
 
@@ -54,18 +61,20 @@ export class VehicleUploadPage {
           icon: 'camera',
           handler: () => {
             this.openCamera();
-          }
-        }
-      ]
+          },
+        },
+      ],
     });
     actionsheet.present();
   }
 
   // ************************* Action sheet *************************
 
+  // ************************* Image upload *************************
   upload() {
     const formData = new FormData();
     formData.append('title', 'vehicle');
+    // Uploads seatNo and plateNo as the description
     formData.append('description', JSON.stringify(this.vehicle));
     formData.append('file', this.vehicleBlob);
     this.dataProvider.uploadMedia(formData).subscribe(
@@ -76,16 +85,14 @@ export class VehicleUploadPage {
         this.addTag(this.vehicleTag);
       },
       err => {
-        console.log(JSON.stringify(err));
-      }
+      },
     );
   }
-
+  // addTag used in upload() too add a corresponding tag every upload
   addTag(tag: TagParam) {
     this.dataProvider.addTag(tag).subscribe(
       res => {
-        console.log(res);
-      }
+      },
     );
   }
 
@@ -94,7 +101,7 @@ export class VehicleUploadPage {
       quality: 100,
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE
+      mediaType: this.camera.MediaType.PICTURE,
     };
     this.camera.getPicture(options).then(
       imageData => {
@@ -103,8 +110,7 @@ export class VehicleUploadPage {
 
       },
       err => {
-        console.log(err);
-      }
+      },
     );
   }
 
@@ -115,7 +121,7 @@ export class VehicleUploadPage {
       sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
       saveToPhotoAlbum: false,
       targetWidth: 300,
-      targetHeight: 300
+      targetHeight: 300,
     };
     this.camera.getPicture(options).then(
       imageData => {
@@ -123,11 +129,11 @@ export class VehicleUploadPage {
         this.vehicleBlob = this.base64ToBlob(this.filedata);
       },
       err => {
-        console.log(err);
-      }
+      },
     );
   }
 
+  // Creates a blob from the base64 DATAURL from gallery/camera
   base64ToBlob(dataURL: string) {
     const byteString = atob(dataURL.split(',')[1]);
     const ab = new ArrayBuffer(byteString.length);
@@ -138,5 +144,5 @@ export class VehicleUploadPage {
     }
     return new Blob([ ab ], { type: 'image/jpeg' });
   }
-
+  // ************************* Image upload *************************
 }

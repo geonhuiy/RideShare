@@ -3,13 +3,6 @@ import { NavController, NavParams } from 'ionic-angular';
 import { DataProvider } from '../../providers/data/data';
 import { Update, UsernameStatus } from '../../interface/user';
 
-/**
- * Generated class for the EditProfilePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @Component({
   selector: 'page-edit-profile',
   templateUrl: 'edit-profile.html',

@@ -1,8 +1,13 @@
 import { Component } from '@angular/core';
-import { AlertController, NavController, NavParams, Refresher } from 'ionic-angular';
-import { DataProvider } from "../../providers/data/data";
-import { Observable } from "rxjs";
-import { Pic } from "../../interface/media";
+import {
+  AlertController,
+  NavController,
+  NavParams,
+  Refresher,
+} from 'ionic-angular';
+import { DataProvider } from '../../providers/data/data';
+import { Observable } from 'rxjs';
+import { Pic } from '../../interface/media';
 
 /**
  * Generated class for the RidedetailsPage page.
@@ -19,10 +24,10 @@ export class RidedetailsPage {
 
   comment = {
     'file_id': 'getRide',
-    'comment': 'dibs'
+    'comment': 'dibs',
   };
   Id: string;
-  url = 'http://media.mw.metropolia.fi/wbma/uploads/'
+  url = 'http://media.mw.metropolia.fi/wbma/uploads/';
   item: Pic;
   uploader: string;
   destination: string;
@@ -32,10 +37,11 @@ export class RidedetailsPage {
   commented: boolean;
   takenSeats: Observable<Comment[]>;
 
-  constructor(public navCtrl: NavController,
-              public navParams: NavParams,
-              private dataProvider: DataProvider,
-              private alertCtrl: AlertController) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private dataProvider: DataProvider,
+    private alertCtrl: AlertController) {
   }
 
   ionViewDidLoad() {
@@ -45,73 +51,75 @@ export class RidedetailsPage {
     this.checkComments();
   }
 
-  getDetails(){
+  getDetails() {
     this.Id = this.navParams.get('Id');
     this.dataProvider.getSingleMedia(this.Id).subscribe(data => {
       this.item = data;
       this.getDestination(data.description);
       this.dataProvider.getUser(data.user_id).subscribe(user => {
         this.uploader = user.username;
-      })
+      });
     });
   }
 
   getDestination(ride: string) {
-    this.destination = (JSON.parse(ride).start + ' - ' + JSON.parse(ride).destination);
-    this.time = (JSON.parse(ride).timeAdded + ' - ' + JSON.parse(ride).timeReached);
+    this.destination = (JSON.parse(ride).start + ' - ' +
+      JSON.parse(ride).destination);
+    this.time = (JSON.parse(ride).timeAdded + ' - ' +
+      JSON.parse(ride).timeReached);
     this.rideDescription = JSON.parse(ride).rideDescription;
   }
 
-  getTakenSeats(){
-    this.takenSeats = this.dataProvider.getTakenSeats(this.Id)
+  getTakenSeats() {
+    this.takenSeats = this.dataProvider.getTakenSeats(this.Id);
   }
 
-  getSeat(){
-    if(!this.commented){
-      console.log("no comments were found");
+  getSeat() {
+    if (!this.commented) {
+      console.log('no comments were found');
       this.dataProvider.getSeat(this.comment).subscribe(res => {
         console.log(res);
         this.ionViewDidLoad();
       });
-    }else{
+    } else {
       this.presentAlert('You already have taken a spot!');
     }
   }
 
-  cancelSeat(commentId:any){
-    if(this.commented){
-      console.log("comments were found");
+  cancelSeat(commentId: any) {
+    if (this.commented) {
+      console.log('comments were found');
       this.dataProvider.cancelSeat(commentId).subscribe(res => {
         console.log(res);
         this.ionViewDidLoad();
       });
-    }else{
+    } else {
       this.presentAlert('You have nothing to cancel!');
     }
   }
 
-  checkComments(){
+  checkComments() {
     this.commented = false;
-    console.log("checking for comments");
+    console.log('checking for comments');
     this.dataProvider.getTakenSeats(this.Id).subscribe(data => {
-      console.log("subscribe");
-      if(data){
-        console.log("found data");
+      console.log('subscribe');
+      if (data) {
+        console.log('found data');
         data.forEach(element => {
-          console.log(element.user_id + " - " + localStorage.getItem("userId"));
-          if(element.user_id == localStorage.getItem("userId")) {
-            console.log("true");
+          console.log(element.user_id + ' - ' + localStorage.getItem('userId'));
+          if (element.user_id == localStorage.getItem('userId')) {
             this.commented = true;
-          }else{
-            console.log("false");
-          };
+          } else {
+          }
+          ;
         });
-      };
+      }
+      ;
     });
   }
 
-  myComment(id:any){
-    return id == localStorage.getItem("userId");
+  myComment(id: any) {
+    return id == localStorage.getItem('userId');
   }
 
   presentAlert(message: string) {

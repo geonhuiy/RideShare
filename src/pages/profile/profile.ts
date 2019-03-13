@@ -123,6 +123,7 @@ export class ProfilePage {
     this.profile = this.dataProvider.getUserProfile();
   }
 
+  // Gets all the pictures with 'profile' tag and returns only files with matching file_id
   getProfilePics() {
     this.dataProvider.getProfilePic().subscribe(
       (response: Pic[]) => {
@@ -131,12 +132,14 @@ export class ProfilePage {
             return obj.user_id.toString() === localStorage.getItem('userId');
           },
         ).map(
+          // Filename as final result
           object => object.filename,
         )[0];
       },
     );
   }
 
+  // Gets all the pictures with 'userVehicle' tag and returns only files with matching file_id
   getUserVehiclePic() {
     this.dataProvider.getVehicles().subscribe(
       (response: Pic[]) => {
@@ -145,13 +148,14 @@ export class ProfilePage {
             return obj.user_id.toString() === localStorage.getItem('userId');
           },
         ).map(
+          // Filename as final result
           object => object.filename,
         )[0];
       },
     );
-    console.log(this.userVehiclePic);
   }
 
+  // Gets all the pictures with 'userVehicle' tag and returns only files with matching file_id
   getUserVehicle() {
     this.dataProvider.getVehicles().subscribe(
       (response: any) => {
@@ -162,6 +166,7 @@ export class ProfilePage {
           },
         ).map(
           (object) => {
+            // Provides description containing vehicle information a
             return JSON.parse(object.description);
           },
         )[0];
