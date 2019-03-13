@@ -162,4 +162,24 @@ export class DataProvider {
     };
     return this.http.get<any>(this.mediaURL + 'comments', httpOptions);
   }
+
+
+
+  getRating() {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'x-access-token': localStorage.getItem('token'),
+      }),
+    };
+    return this.http.get<any>(this.mediaURL + 'ratings', httpOptions);
+  }
+
+  addRating(rating: any) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'x-access-token': localStorage.getItem('token'),
+      }),
+    };
+    return this.http.post<any>(this.mediaURL + 'ratings', rating, httpOptions);
+  }
 }

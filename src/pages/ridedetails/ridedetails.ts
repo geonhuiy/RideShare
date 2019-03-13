@@ -32,8 +32,18 @@ export class RidedetailsPage {
   uploader: string;
   destination: string;
   rideDescription: string;
+  stars: number;
+  noStars: number;
   time: string;
   test: any;
+  today = new Date();
+  rate = {
+    'file_id': '',
+    'rating': '',
+  };
+  rating = 0;
+  rateCount = 0;
+  rated = false;
   commented: boolean;
   takenSeats: Observable<Comment[]>;
 
@@ -49,6 +59,9 @@ export class RidedetailsPage {
     this.getTakenSeats();
     this.comment.file_id = this.Id;
     this.checkComments();
+    this.stars = 4;
+    this.noStars = 5 - this.stars;
+    this.getRate();
   }
 
   getDetails() {
@@ -120,6 +133,48 @@ export class RidedetailsPage {
 
   myComment(id: any) {
     return id == localStorage.getItem('userId');
+  }
+
+  isExpiredRide(item: Pic) {
+    let date = new Date(
+      this.today.getFullYear() + '-' + (this.today.getMonth() + 1) + '-' +
+      this.today.getDate());
+    let date1 = new Date(JSON.parse(item.description).timeDate);
+    return (date1 < date);
+  }
+
+  addRate(rate: string) {
+    console.log('rating now: ' + rate);
+    this.rate.file_id = this.Id;
+    this.rate.rating = rate;
+    this.dataProvider.addRating(this.rate).subscribe(res => {
+      console.log(res);
+    });
+    this.ionViewDidLoad();
+  }
+
+  getRate() {
+    this.dataProvider.getRating().subscribe(res => {
+      //console.log(res);
+      res.forEach(element => {
+        if (element.user_id == localStorage.getItem('userId') &&
+          element.file_id == this.Id) {
+          this.rated = true;
+        }
+        this.dataProvider.getSingleMedia(element.file_id).subscribe(data => {
+          //console.log(data);
+          if (data.user_id == this.item.user_id) {
+            let i = 0;
+            if (this.rateCount > 0 && this.rating > 0) {
+              i = this.rating * this.rateCount;
+            }
+            this.rateCount++;
+            this.rating = (i + element.rating) / this.rateCount;
+            //console.log("in data " + this.rating);
+          }
+        });
+      });
+    });
   }
 
   presentAlert(message: string) {
