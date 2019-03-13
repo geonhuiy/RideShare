@@ -64,7 +64,7 @@
             </ion-item>
             <ion-item>
               <ion-label>Password</ion-label>
-              <ion-input type="text" [(ngModel)]="userData.password" name="password"></ion-input>
+              <ion-input type="password" [(ngModel)]="userData.password" name="password"></ion-input>
             </ion-item>
             <button ion-button type="submit" block>Log in</button>
             <a link href="#" (click)="hasAccount=false" block>Don't have an account yet?</a>
@@ -80,11 +80,11 @@
             </ion-item>
             <ion-item>
               <ion-label>Password</ion-label>
-              <ion-input type="text" [(ngModel)]="registerData.password" name="newPassword" minlength="6" required></ion-input>
+              <ion-input type="password" [(ngModel)]="registerData.password" name="newPassword" minlength="6" required></ion-input>
             </ion-item>
             <ion-item>
               <ion-label>Confirm password</ion-label>
-              <ion-input type="text" [(ngModel)]="passwordCheck" name="passwordCheck" minlength="6" required (ionBlur)="checkPassword()"></ion-input>
+              <ion-input type="password" [(ngModel)]="passwordCheck" name="passwordCheck" minlength="6" required (ionBlur)="checkPassword()"></ion-input>
             </ion-item>
             <ion-item *ngIf="!passwordMatch">
               <p>Password doesn't match!</p>

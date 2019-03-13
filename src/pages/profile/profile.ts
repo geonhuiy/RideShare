@@ -113,6 +113,7 @@ export class ProfilePage {
   // ************************* Action sheet *************************
 
   logout() {
+    localStorage.clear();
     localStorage.removeItem('token');
     localStorage.removeItem('userId');
     this.dataProvider.loggedIn = false;

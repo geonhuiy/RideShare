@@ -137,7 +137,7 @@ export class HomePage {
   login() {
     this.dataProvider.login(this.userData).subscribe(
       (response: LoginResponse) => {
-        console.log(response);
+        //console.log(response);
         localStorage.setItem('token', response.token);
         localStorage.setItem('userId', response.user.user_id.toString());
         this.dataProvider.loggedIn = true;
